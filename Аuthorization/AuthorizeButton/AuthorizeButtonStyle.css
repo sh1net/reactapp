@@ -1,0 +1,19 @@
+.button{
+    font-family: sans-serif;
+    
+    width: 300px;
+    height: 55px;
+    background-color:#EBA600 ;
+    border-radius: 5px;
+    color: #340F0F;
+    border: 0;
+    box-shadow: 3px 3px 15px #333 ;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color, background-color  0.25s linear;
+}
+
+.button:hover{
+    color: rgb(16, 16, 16);
+    background-color:rgb(255, 255, 255) ;
+}
