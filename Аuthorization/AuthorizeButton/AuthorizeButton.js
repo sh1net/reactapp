@@ -1,8 +1,10 @@
 import React from "react";
 import "./AuthorizeButtonStyle.css"
-function AuthorizeButton(props){
+import {BrowserRouter, Switch ,Routes,Route,Link} from "react-router-dom"
+
+function AuthorizeButton({onClick,...props}){
     return(
-        <button  onClick className="button">{props.buttonText}</button>
+        <button  onClick={onClick} className="button">{props.buttonText}</button>
     )
 }
 
