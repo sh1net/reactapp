@@ -8,6 +8,7 @@ function App(){
   return(
     <BrowserRouter>
     <Routes>
+      
       <Route exact path="/" element={<MainAuthorization/>}/>
       <Route exact path="/Registration" element={<Registration/>}/>
       <Route exact path="/Login" element={<Login/>}/>

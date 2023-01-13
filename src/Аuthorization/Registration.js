@@ -14,6 +14,8 @@ function Registration(){
             else password.type='password';
         };
     return(
+
+        
         <div className="background">
             
             <img className="img--logo" src={logo}/>
