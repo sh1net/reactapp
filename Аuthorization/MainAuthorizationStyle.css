@@ -20,20 +20,102 @@
     font-size: 28px;
 }
 
+.item--input{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    width:306px;
+    height:50px;
+    align-self: center;
+    background: rgba(235, 166, 0, 0.3);
+    border: 2px solid #000000;
+    box-shadow: 3px 4px 4px 1px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+}
 
+.item--input:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
 
+.item--reg_button{
+    align-self: center;
+    width: 249px;
+    height: 49px;
+    background: #EBA600;
+    box-shadow: 3px 3px 15px #333 ;
+    border-radius: 5px;
+    border: 0;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #340F0F;
+    cursor: pointer;
+    transition: color, background-color  0.25s linear; 
+}
+button img{
+    width:20px;
+    height:20px;
+}
+.item--reg_button:hover{
+    color: rgb(16, 16, 16);
+    background-color:rgb(255, 255, 255) ;
+}
+
+.glazik{
+    cursor: pointer;
+    display: block;
+    border:0;
+    background: rgba(205, 214, 219, 0);
+    margin-bottom: -25px;
+}
+.item--reg{
+    align-self: center;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+}
 .athorization--item{
 align-self: center;
-
 }
 
-.support{
+.item--help{
+    display:flex;
+    justify-content: space-around;
+}
+.support {
+    font-size: 20px;
+    color:rgb(0, 0, 0);
+    align-self:right;
+    margin-right:20px;
+}
+
+.enter{
 font-size: 20px;
 color:rgb(0, 0, 0);
-text-align: right;
-margin-right: 20px;
 }
 
+.registration--container{
+    padding-top: 15px;
+    position: relative;
+    width: 100%;
+    max-width: 423px;
+    height: 100%;
+    max-height: 451px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 30px;
+    border: 5px solid #333 ;
+    margin: 30px auto;
+}
 .athorization--container{
     padding-top: 15px;
     position: relative;
@@ -48,7 +130,3 @@ margin-right: 20px;
     border: 5px solid #333 ;
     margin: 30px auto;
 }
-
-
-
-
