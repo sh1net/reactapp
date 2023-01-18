@@ -13,8 +13,6 @@ function Login(){
             <img className="img--logo" src={logo}/>
             <div className="logo--title">ARISHTEST</div>
             <div className="athorization--container">
-           
-            
             <a  href="#" className="support">Связаться с нами</a>
             </div>
            
