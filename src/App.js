@@ -1,7 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
 import MainAuthorization from "./Аuthorization/MainAuthorization" 
-import {BrowserRouter, Switch ,Routes,Route,Link} from "react-router-dom"
+import {BrowserRouter, Routes,Route} from "react-router-dom"
 import Registration from "./Аuthorization/Registration";
 import Login from "./Аuthorization/Login";
 function App(){
