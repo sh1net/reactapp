@@ -8,7 +8,6 @@ import {BrowserRouter, Switch ,Routes,Route,Link} from "react-router-dom"
 import ReactDOMClient from 'react-dom/client';
 import App from "../App";
 function MainAuthorization(){
-
     return(
         <div className="background">
             <img className="img--logo" src={logo}/>
