@@ -1,0 +1,25 @@
+import React from "react";
+import Registration from "./Registration";
+import Login from "./Login";
+import "./MainAuthorizationStyle.css"
+import logo from "./img/logo.png"
+import AuthorizeButton from "./AuthorizeButton/AuthorizeButton";
+import {Link} from "react-router-dom"
+
+
+function MainAuthorization(){
+
+    return(
+        <div className="background">
+            <img className="img--logo" src={logo}/>
+            <div className="logo--title">ARISHTEST</div>
+            <div className="athorization--container">
+            <div className="athorization--item">  <Link to="/Login"><AuthorizeButton buttonText={"ВХОД"}/></Link></div> 
+            <div className="athorization--item">  <Link to="/Registration"><AuthorizeButton buttonText={"Регистрация"} /></Link></div>
+            <a  href="#" className="support">Связаться с нами</a>
+            </div>
+        </div>
+    )
+}
+
+export default MainAuthorization
