@@ -17,12 +17,26 @@ function Registration(){
             const name=document.getElementById('name');
             const mail=document.getElementById('mail');
             const pass=document.getElementById('pass');
+            const reg=document.getElementById('reg-but');
+            var sum=0;
+            for(var i=0;i<pass.textContent.length;i++)
+            {
+                sum+=1;
+            }
             if(name.value==""||mail.value==""||pass.value==""){
                 alert("Введите данные полей");
             }
-            else{
-                alert("true");
+            
+            /*if(sum<8){
+                alert("Ваш пороль слишком короткий")
             }
+            if(mail.textContent.type!='mail'){
+                alert("Не правильно указана почта")
+            }*/
+            else{
+                reg=document.location='/Login';
+            }
+            
         }
     return(        
         <div className="background">  
@@ -36,7 +50,7 @@ function Registration(){
                     <button className="glazik" onClick={Hidepass}><img src={Glazik}></img></button>
                 </div>
                 <input required type="email" id="mail" placeholder="Ваша электронная почта" className="item--input"/>
-                <button className="item--reg_button" onClick={Detected}><Link to="/Login">Зарегистрироваться</Link></button>
+                <button className="item--reg_button" onClick={Detected} id="reg-but">Зарегистрироваться</button>
                 <div className="item--help">
                 <Link to="/Login"><a  href="#" className="enter">Уже есть аккаунт?</a></Link>
                     <a  href="#" className="support">Связаться с нами</a>
