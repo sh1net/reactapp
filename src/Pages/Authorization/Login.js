@@ -1,19 +1,33 @@
 import React from "react";
 import "./MainAuthorizationStyle.css"
-import logo from "./img/logo.png"
-import Glazik from "./img/glazik.png"
-import AuthorizeButton from "./AuthorizeButton/AuthorizeButton";
-import {BrowserRouter, Switch ,Routes,Route,Link} from "react-router-dom"
-import ReactDOMClient from 'react-dom/client';
-import Registration from "./Registration";
-import App from "../App";
-
+import logo from "../../img/logo.png"
+import Glazik from "../../img/glazik.png"
+import {Link} from "react-router-dom"
+import { useState } from "react";
+import { useEffect } from "react";
 function Login(){
     function Hidepass(){ 
         const password=document.getElementById('pass');
         if(password.type==='password') password.type='text';
         else password.type='password';
     };
+
+    const [CorrectLogin,setCorrectLogin] = useState({
+        placeholder:'Ваш логин',
+        isCorrect:true
+    });
+    const [CorrectPassword, setCorrectPassword] = useState({
+        placeholder:'Ваш пароль',
+        isCorrect:true
+    });
+    useEffect(() => {
+        if(
+          CorrectLogin.isCorrect&&
+          CorrectPassword.isCorrect
+          
+          ){ 
+        }  
+      }, [CorrectLogin,CorrectPassword])
     return(
         <div className="background">
             <img className="img--logo" src={logo}/>
@@ -27,8 +41,8 @@ function Login(){
                 </div>
                 <button className="item--reg_button">Войти</button>
                 <div className="item--help">
-                    <Link to="/Registration"><a  href="#" className="enter">Нет аккаунта?</a></Link>
-                    <a  href="#" className="support">Связаться с нами</a>
+                    <Link to="/authorization/registration" className="enter"><div >Нет аккаунта?</div></Link>
+                    <Link to="/authorization/support" className="support"><div >Связаться с нами</div></Link>
                 </div>
             </div>
         </div>

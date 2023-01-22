@@ -1,5 +1,5 @@
 .background{
-    background: url(./img/textBackground.png);
+    background: url(../../img/textBackground.png);
     background-position: center;
     background-repeat: no-repeat ;
     background-size: cover;
@@ -35,6 +35,13 @@
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
+}
+.item--input--uncorrect{
+    
+}
+.item--input--uncorrect::placeholder{
+    color: #eb4646;
+    opacity: 1;
 }
 
 .item--input:active, :hover, :focus {
@@ -95,11 +102,13 @@ align-self: center;
     color:rgb(0, 0, 0);
     align-self:right;
     margin-right:20px;
+    text-decoration-color: #000;
 }
 
 .enter{
 font-size: 20px;
 color:rgb(0, 0, 0);
+text-decoration-color: #000;
 }
 
 .registration--container{

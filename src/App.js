@@ -1,17 +1,19 @@
 import React from "react";
-import MainAuthorization from "./Аuthorization/MainAuthorization" 
-import {BrowserRouter, Routes,Route} from "react-router-dom"
-import Registration from "./Аuthorization/Registration";
-import Login from "./Аuthorization/Login";
+import {BrowserRouter} from "react-router-dom"
+import { useState } from "react";
+import { authContext } from "./Context/useContext";
+import AppRouter from "./AppRouter/AppRouter";
 function App(){
+  const [isAuth, setIsAuth] = useState(false);
+  
+  
+
   return(
-    <BrowserRouter>
-    <Routes>
-      <Route exact path="/" element={<MainAuthorization/>}/>
-      <Route exact path="/Registration" element={<Registration/>}/>
-      <Route exact path="/Login" element={<Login/>}/>
-    </Routes>
-    </BrowserRouter>
+    <authContext.Provider value={{isAuth,setIsAuth}}>
+        <BrowserRouter>
+        <AppRouter/>
+        </BrowserRouter>
+    </authContext.Provider>
   )
 }
 export default App
