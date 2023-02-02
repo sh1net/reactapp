@@ -37,7 +37,7 @@
     line-height: 26px;
 }
 .item--input--uncorrect{
-    
+    border: 2px solid #eb4646;
 }
 .item--input--uncorrect::placeholder{
     color: #eb4646;
@@ -80,6 +80,9 @@ button img{
     border:0;
     background: rgba(205, 214, 219, 0);
     margin-bottom: -25px;
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
 }
 .item--reg{
     align-self: center;

@@ -2,9 +2,13 @@
 import Registration from "../Pages/Authorization/Registration";
 import MainAuthorization from "../Pages/Authorization/MainAuthorization";
 import Login from "../Pages/Authorization/Login";
+import Main from "../Pages/Main/Main";
 import { Navigate } from "react-router-dom";
+
 export const privateRoutes=[
+    {path:"/main/:id",element:<Main/>,exact:true},
     
+
 ]
 
 export const publicRoutes=[

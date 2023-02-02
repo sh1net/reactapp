@@ -1,14 +1,11 @@
 import React from "react";
-
 import "./MainAuthorizationStyle.css"
 import logo from "../../img/logo.png"
-import AuthorizeButton from "../AuthorizeButton/AuthorizeButton";
 import {Link} from "react-router-dom"
-
-
+import AuthorizeButton from "../../Components/AuthorizeButton/AuthorizeButton";
 
 function MainAuthorization(){
-    
+  
     return(
         <div className="background">
             <img className="img--logo" src={logo}/>
