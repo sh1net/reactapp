@@ -1,17 +1,30 @@
 .info__container{
+margin: 0 auto;
 display: flex;
-justify-content: space-around;
-flex-wrap: wrap;
 padding:20px;
+flex-direction: column;
+background-color: rgb(216, 216, 216);
+justify-content: center;
+width: 95%;
 }
 
 .info__item{
-
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: 10px;
+margin-top: 10px;
+}
+.info__item:nth-child(2){
+    justify-content: flex-start;
 }
 
 .info__item__text{
-font-size: 40px;
+font-family: 'Montserrat', sans-serif;
+font-size: 25px;
+padding:5px;
+width: 80%;
 }
 .info__item__img{
-
+width: 300px;
 }

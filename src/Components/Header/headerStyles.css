@@ -1,7 +1,7 @@
 .header{
     display: flex;
     margin-left: -20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .header__logo{
