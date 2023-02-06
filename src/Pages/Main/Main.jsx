@@ -7,20 +7,29 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PostService from '../../Api/PostService';
 import { useFetching } from '../../hooks/useFething';
-
+import Header from '../../Components/Header/Header';
+import MainInformation from '../../Components/MainInformation/MainInformation';
 function Main() {
     const params=useParams();
     const {user,setUser,setIsAuth}=useContext(authContext);
-    const [fetchUserById,error]=useFetching(async(id)=>{
+    const [fetchUserById,isLoading]=useFetching(async(id)=>{
     const fetchedUserById=await PostService.getUserById(id);
     })
 
     useEffect(() => {
-     fetchUserById(params.id);
+      setTimeout(() => {
+        fetchUserById(params.id);
+
+      }, 1000);
     }, [])
-  return (
+
+  return (isLoading
+    ?<Loader/>
+    :
     <div>
+      <Header/>
         <Navbar setIsAuth={setIsAuth}/>
+        <MainInformation/>
     </div>
   )
 }

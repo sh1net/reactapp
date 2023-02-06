@@ -1,0 +1,18 @@
+.header{
+    display: flex;
+    margin-left: -20px;
+    margin-bottom: 20px;
+}
+
+.header__logo{
+    height: 60px;
+    
+}
+
+.header__title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-left: -20px;
+    font-family: 'Raleway', sans-serif;
+}

@@ -19,8 +19,8 @@ function AppRouter() {
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
-        <Route  path="/" element={ <Navigate replace to={"/main/"+localStorage.getItem('userID')}/>}/>
-        <Route  path="*" element={ <Navigate replace to={"/main/"+localStorage.getItem('userID')}/>}/>
+        <Route  path="/" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
+        <Route  path="*" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
         </Routes>
      
         

@@ -71,12 +71,11 @@ function Login() {
          loginUser
          ) {
             if(loginUser.login&&loginUser.password){
-               const id=users.find((val)=>val.login===loginUser.login).id
-               console.log(id)
-              localStorage.setItem('userID',id.toString());
+               const login=users.find((val)=>val.login===loginUser.login).login
+              localStorage.setItem('userLogin',login);
                setIsAuth(true)
               localStorage.setItem('auth','true');
-              navigate('/main/'+id);
+              navigate('/main/'+login);
             }
             
     }
@@ -165,7 +164,7 @@ function Login() {
           <Link to="/authorization/registration" className="enter">
             <div>Нет аккаунта?</div>
           </Link>
-          <Link to="/authorization/support" className="support">
+          <Link to="/support" className="support">
             <div>Связаться с нами</div>
           </Link>
         </div>

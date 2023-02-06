@@ -1,0 +1,17 @@
+.info__container{
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+padding:20px;
+}
+
+.info__item{
+
+}
+
+.info__item__text{
+font-size: 40px;
+}
+.info__item__img{
+
+}

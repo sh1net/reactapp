@@ -179,8 +179,8 @@ useEffect(() => {
               Уже есть аккаунт?
             </div>
           </Link>
-          <Link to={"/support"} className="support">
-          <div >
+          <Link to="/support" className="support">
+          <div>
             Связаться с нами
           </div>
           </Link>

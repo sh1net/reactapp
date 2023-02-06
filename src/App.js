@@ -40,7 +40,7 @@ function App(){
   <Loader/>
   :
     <authContext.Provider value={{isAuth,setIsAuth,users,setUsers,user,setUser}}>
-        <BrowserRouter>
+        <BrowserRouter >
         <AppRouter/>
         </BrowserRouter>
     </authContext.Provider>
