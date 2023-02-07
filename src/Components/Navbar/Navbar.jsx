@@ -4,9 +4,9 @@ import { useContext } from 'react';
 import { authContext } from '../../Context/useContext';
 import exitIcon from '../../img/exitIcon.png'
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-function Navbar({setIsAuth}) {
-const user=useParams();
+import { Link,NavLink } from 'react-router-dom';
+function Navbar({setIsAuth,user}) {
+
 
  function exit(){
     setIsAuth(false);
@@ -16,10 +16,10 @@ const user=useParams();
     <div> 
     <div className='navbar'>
       <div className='navbar__left'>
-    <a className='nav__link' href="default.asp">Главная</a>
-    <a className='nav__link' href="news.asp">Тесты</a>
-    <a className='nav__link' href="contact.asp">О нас</a>
-    <Link to ='/support' className='nav__link'>Связаться с нами</Link>
+    <NavLink className='nav__link' to={'/'}>Главная</NavLink>
+    <NavLink className='nav__link' to='/'>Тесты</NavLink>
+    <NavLink className='nav__link' to='/'>О нас</NavLink>
+    <NavLink to ='/support' className='nav__link'>Связаться с нами</NavLink>
     </div>
     <div className="navbar__right">
       <div className='nav__user'>{user.login}</div>

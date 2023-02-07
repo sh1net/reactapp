@@ -8,19 +8,22 @@ import { useContext } from 'react'
 
 function AppRouter() {
     const{isAuth}= useContext(authContext)
-
+  console.log(localStorage.getItem('userLogin'))
   return (
     
     
       isAuth
       ?
-      <Routes>
+      <Routes> 
          {privateRoutes.map(route=>
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
-        <Route  path="/" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
-        <Route  path="*" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
+        <Route exact path="/" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
+        <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
+        <Route element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>} />
+       
+
         </Routes>
      
         
