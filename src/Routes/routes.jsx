@@ -5,9 +5,11 @@ import Login from "../Pages/Authorization/Login";
 import Main from "../Pages/Main/Main";
 import { Navigate } from "react-router-dom";
 import Support from "../Pages/Support/Support";
+import AboutUs from "../Pages/AboutUs/AboutUs"
 export const privateRoutes=[
     {path:"/main/:login",element:<Main/>,exact:true},
-    {path:"/support",element:<Support/>,exact: true}
+    {path:"/support",element:<Support/>,exact: true},
+    {path:"/about",element:<AboutUs/>,exact:true}
 ]
 
 export const publicRoutes=[

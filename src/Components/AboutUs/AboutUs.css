@@ -1,0 +1,30 @@
+.about__container{
+margin: 0 auto;
+display: flex;
+padding:20px;
+flex-direction: column;
+background-color: rgb(216, 216, 216);
+justify-content: center;
+width: 95%;
+}
+
+.about__item{
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: 10px;
+margin-top: 10px;
+}
+.about__item:nth-child(2){
+    justify-content: flex-start;
+}
+
+.about__item__text{
+font-family: 'Montserrat', sans-serif;
+font-size: 25px;
+padding:5px;
+width: 80%;
+}
+.about__item__img{
+width: 300px;
+}

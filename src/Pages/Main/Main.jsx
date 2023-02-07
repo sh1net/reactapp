@@ -12,13 +12,13 @@ import MainInformation from '../../Components/MainInformation/MainInformation';
 function Main() {
     const params=useParams();
     const {user,setUser,setIsAuth}=useContext(authContext);
-    const [fetchUserById,isLoading]=useFetching(async(id)=>{
-    const fetchedUserById=await PostService.getUserById(id);
+    const [fetchUserById,isLoading]=useFetching(async(login)=>{
+    const fetchedUserById=await PostService.getUserById(login);
     })
 
     useEffect(() => {
       setTimeout(() => {
-        fetchUserById(params.id);
+        fetchUserById(params.login);
 
       }, 1000);
     }, [])

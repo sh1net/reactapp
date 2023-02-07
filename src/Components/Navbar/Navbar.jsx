@@ -18,7 +18,7 @@ const user=useParams();
       <div className='navbar__left'>
     <a className='nav__link' href="default.asp">Главная</a>
     <a className='nav__link' href="news.asp">Тесты</a>
-    <a className='nav__link' href="contact.asp">О нас</a>
+    <Link to ='/about' className='nav__link'>О нас</Link>
     <Link to ='/support' className='nav__link'>Связаться с нами</Link>
     </div>
     <div className="navbar__right">
