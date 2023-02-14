@@ -1,0 +1,95 @@
+.Create__Test__bg{
+    margin: 0 auto;
+    display: flex;
+    padding:20px;
+    flex-direction: column;
+    background-color: rgb(216, 216, 216);
+    justify-content: center;
+    width: 95%;
+    
+}
+
+.Create__Test__container{
+font-family: 'Raleway', sans-serif;
+margin: 0 auto;
+display: flex;
+justify-content: space-around;
+width: 90%;
+background-color: #fff;
+border-radius: 40px;
+}
+
+.ct__selectors{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
+width: 30%;
+}
+.ct__selectors:last-child(){
+
+}
+.ct__selectors__item{
+margin-top:40px ;
+}
+.ct__item__selector{
+
+}
+
+.ct__item__text{
+font-size: 20px;
+}
+
+.ct__right{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.ct__right button{
+    width: 200px;
+    align-self:center ;
+}
+.ct__creater{
+  
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.ct__creater__container{
+    overflow-y: scroll;
+    max-height: 700px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: rgb(170, 170, 170);
+}
+
+
+
+.ct_quastions_container{
+margin: 10px 0;
+background-color: rgb(220, 220, 220);
+display: flex;
+align-items: center;
+padding: 20px;
+flex-direction: column;
+}
+.ct_question{
+margin: 10px;
+background-color: antiquewhite;
+width: 100%;
+padding: 10px;
+}
+
+.ct__quastion__pic{
+    width: 200px;
+    display: block;
+    margin: 10px;
+}
+
+.ct__answer{
+display: flex;
+margin: 5px 0;
+}

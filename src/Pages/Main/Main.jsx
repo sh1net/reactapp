@@ -11,32 +11,29 @@ import Header from '../../Components/Header/Header';
 import MainInformation from '../../Components/MainInformation/MainInformation';
 
 function Main() {
- const params=useParams();
- const navigate=useNavigate();
-    const {user,users,setUser,setIsAuth}=useContext(authContext);
-    const [fetchUserById,isLoading]=useFetching(async(id)=>{
-    const fetchedUserById=await PostService.getUserById(id);
+ 
+  
+    const {user,users,setUser}=useContext(authContext);
+    const [fetchUserById,isLoading]=useFetching(async(login)=>{
+    const fetchedUserById=await PostService.getUserById(login);
     setUser(fetchedUserById);
     })
   
 
     useEffect(() => {
-      if(params.login!==localStorage.getItem('userLogin')){
-        navigate('/main/'+localStorage.getItem('userLogin'))
-      }
+     
       setTimeout(() => {
-        console.log(params.login)
         const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id
         fetchUserById(id);
       }, 1000);
     }, [])
-
-  return (isLoading
+   
+  return (isLoading&&!user.login
     ?<Loader/>
     :
     <div>
       <Header/>
-        <Navbar setIsAuth={setIsAuth} user={user}/>
+        <Navbar/>
         <MainInformation/>
     </div>
   )

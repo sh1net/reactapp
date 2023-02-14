@@ -1,6 +1,9 @@
 
 import { db } from "../firebase";
-import {get,set,ref,child, onValue} from "firebase/database"
+import { storage } from "../firebase";
+import { uploadBytesResumable, getDownloadURL, ref as sRef } from "firebase/storage";
+
+import {get,set,ref,child} from "firebase/database"
 
 export default class PostService{
     static async getUsers(){
@@ -42,22 +45,41 @@ export default class PostService{
       });
      return data;
   }
-  static  async testPost(){
-    
-   const data=await get(child(ref(db),'/users')).then(snapshot=>{
+  
 
-      if (snapshot.exists()) {
-  
-       return snapshot.val();
-  
-      } 
-      
-  
-    }).catch((error) => {
-  
-      console.error(error);
-  
-    });
-    return data;
+static  setUserTest(currentTest,userTests,id){
+  console.log("dsds")
+  set(ref(db,'/users/'+id+'/MyTests'),[...userTests,currentTest])
 }
+
+static  async getUserTestsById(id){
+  const data=await  get(child(ref(db),'/users/'+id+'/MyTests')).then(snapshot=>{
+    if (snapshot.exists()) {
+      
+      return snapshot.val()
+
+    } 
+    
+
+  }).catch((error) => {
+
+    console.error(error);
+
+  });
+ return data;
+}
+
+static  async uploadTestImg(file){
+const testImgRef=sRef(storage,'testImages/'+file.name);
+const uploadTask=uploadBytesResumable(testImgRef,file);
+uploadTask.on('state_changed',(p)=>{});
+}
+
+static  async getTestImg(file,setQuestions,questions,id){
+  const testImgRef=sRef(storage,'testImages/'+file.name);
+  getDownloadURL(testImgRef).then(url=>{
+    setQuestions([...questions.map((question)=>question.id==id?{...question,pic:url}:question)])
+  })
+ 
+  }
 }

@@ -7,19 +7,24 @@ import { useEffect } from "react";
 import PostService from "./Api/PostService";
 import Loader from "./Components/Loader/Loader";
 import { useFetching } from "./hooks/useFething";
+import { testContext } from "./Context/useContext";
 function App(){
   const [isAuth, setIsAuth] = useState(false);
   const [users, setUsers] = useState(null);
-
-  const [fetchUsers,isLoading,setIsLoading]=useFetching(async()=>{
+  const [userTests, setUserTests] = useState(null)
+   
+  
+  const [fetchUsers,isLoading]=useFetching(async()=>{
    const fetchedUsers= await PostService.getUsers();
     setUsers(fetchedUsers);
   })
+
   const [user, setUser] = useState({
     login:'',
     password:'',
     email:'',
-    id:0
+    id:0,
+    groupMember:''
   })
 
  
@@ -40,10 +45,12 @@ function App(){
   <Loader/>
   :
     <authContext.Provider value={{isAuth,setIsAuth,users,setUsers,user,setUser}}>
+        <testContext.Provider value={{userTests,setUserTests}}>
         <BrowserRouter >
         <AppRouter/>
         </BrowserRouter>
-    </authContext.Provider>
+        </testContext.Provider>
+      </authContext.Provider>
   )
 }
 export default App

@@ -4,11 +4,12 @@ import { authContext } from '../Context/useContext'
 import { publicRoutes } from '../Routes/routes'
 import { privateRoutes } from '../Routes/routes'
 import { useContext } from 'react'
-
-
+import { testContext } from '../Context/useContext'
+import { useState } from 'react'
 function AppRouter() {
     const{isAuth}= useContext(authContext)
-  console.log(localStorage.getItem('userLogin'))
+ 
+
   return (
     
     
@@ -19,13 +20,13 @@ function AppRouter() {
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
-        <Route exact path="/" element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>}/>
+        <Route exact path="/" element={ <Navigate replace to={"/main"}/>}/>
         <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
-        <Route element={ <Navigate replace to={"/main/"+localStorage.getItem('userLogin')}/>} />
+        <Route element={ <Navigate replace to={"/main"}/>} />
        
 
         </Routes>
-     
+        
         
       : <Routes>
       {publicRoutes.map(route=>
@@ -36,5 +37,4 @@ function AppRouter() {
     
   )
 }
-
 export default AppRouter

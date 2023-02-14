@@ -17,7 +17,7 @@ function Login() {
   const [loginUser, setLoginUser] = useState({
     login: "",
     password: "",
-    id:user.id??0
+    id:user.id??''
   });
 
 
@@ -29,7 +29,7 @@ function Login() {
         setLoginUser({
           login: user.login,
           password: user.password,
-          id:0
+          id:''
         });
         
     }
@@ -37,7 +37,9 @@ function Login() {
     login: "",
     password: "",
     email:"",
-    id:0}
+    id:0,
+    groupMember:''
+  }
     )
 })
 
@@ -75,7 +77,7 @@ function Login() {
               localStorage.setItem('userLogin',login);
                setIsAuth(true)
               localStorage.setItem('auth','true');
-              navigate('/main/'+login);
+              navigate('/main');
             }
             
     }
@@ -99,28 +101,22 @@ function Login() {
   function logIn(e) {
     e.preventDefault();
     const tempUser={}
-    if(!checkLogin()){
+    if(!checkLogin()||!checkPasswrod()){
       tempUser.login='';
+      tempUser.password='';
     setCorrectLogin({placeholder:"Неверный логин",isCorrect:false})
+    setCorrectPassword({placeholder:"Неверный пароль",isCorrect:false})
     }
     else{
       tempUser.login=loginUser.login
-      setCorrectLogin({placeholder:"Ваш логин",isCorrect:true})
-
-    }
-    if(!checkPasswrod()){
-      tempUser.password='';
-       setCorrectPassword({placeholder:"Неверный пароль",isCorrect:false})
-    }
-    else{
       tempUser.password=loginUser.password;
+      setCorrectLogin({placeholder:"Ваш логин",isCorrect:true})
       setCorrectPassword({placeholder:"Ваш пароль",isCorrect:true})
-
     }
     setLoginUser({...tempUser,id:loginUser.id});
   }
   
-  return isLoading&&loginUser.id!==0?<Loader/>
+  return isLoading&&loginUser.id!==''?<Loader/>
   :
    (
     <div className="background">

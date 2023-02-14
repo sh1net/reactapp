@@ -5,9 +5,20 @@ import Login from "../Pages/Authorization/Login";
 import Main from "../Pages/Main/Main";
 import { Navigate } from "react-router-dom";
 import Support from "../Pages/Support/Support";
+import AboutUs from "../Pages/AboutUs/AboutUs"
+import MyTests from "../Pages/MyTests/MyTests";
+import PassTest from "../Pages/PassTest/PassTest";
+import CreateTest from "../Pages/CreateTest/CreateTest";
+
 export const privateRoutes=[
-    {path:"/main/:login",element:<Main/>,exact:true},
-    {path:"/support",element:<Support/>,exact: true}
+
+    {path:"/main",element:<Main/>,exact:true},
+    {path:"/support",element:<Support/>,exact: true},
+    {path:"/about",element:<AboutUs/>,exact:true},
+    {path:"/myTests",element:<MyTests/>,exact:true},
+    {path:"/testCreater",element:<CreateTest/>,exact:true},
+    {path:"/passTests",element:<PassTest/>,exact:true}
+
 ]
 
 export const publicRoutes=[
