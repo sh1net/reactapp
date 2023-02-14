@@ -326,7 +326,7 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                     </div>
                     
                 </div>
-                <button onClick={()=>{confirmTest()}}>Создать тест</button>
+                <button onClick={()=>{confirmTest()}} className="ct__button__createtest">Создать тест</button>
             </div>
             
             <hr style={{width:'1px',height:'800px',backgroundColor:'#000'}}/>
@@ -334,23 +334,23 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
             <div className="ct__right">
             <div className="ct__creater">
                 <div className="ct__creater__container">
-                    Название теста
-                <input type="text" value={currentTest.title} onChange={(e)=>setCurrentTest({...currentTest,title:e.target.value})} />
+                    <text className="ct__test__name_1">Название теста</text>
+                <input className="ct__test__name" type="text" value={currentTest.title} onChange={(e)=>setCurrentTest({...currentTest,title:e.target.value})} />
                 {questions.length!==0
-                ?<p> Баллы за весь тест {questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</p>
+                ?<p className="ct__test__points"> Баллы за весь тест {questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</p>
                 :""
               }
                 <div className="ct_quastions_container">
                     {questions.map((question,iQ,qArr)=>
                     <div className='ct_question' key={question.id}>
-                      {iQ+1}. <br/>
-                        <select value={question.type}  onChange={(e)=>{choseQuestionType(iQ,e.target.value)}}>
+                      {iQ+1}.
+                        <select className="ct__select__items" value={question.type}  onChange={(e)=>{choseQuestionType(iQ,e.target.value)}}>
                         <option disabled={true} value={""}>Выберите тип вопроса</option>
                             <option value={"oneIsRight"}>Один вариант ответа</option>
                             <option  value={"severalIsRight"}>Множество вариантов ответа</option>
                             <option value={"typeAnswer"}>Написать ответ</option>
                         </select>
-                        <select value={question.mark} onChange={(e)=>choseQuestionMark(iQ,e.target.value)} >
+                        <select className="ct__select__items" value={question.mark} onChange={(e)=>choseQuestionMark(iQ,e.target.value)} >
                           <option value={""}  disabled={true}>Выберите балл </option>
                            <option value={1}>1 балл</option>
                             <option value={2}>2 балл</option>
@@ -360,10 +360,10 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                         ?<p>Вы можете установить картинку к тесту</p>
                         :""
                         }
-                        <input type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
+                        <input className="file__upload__button" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
                         <img src={question.pic} alt="" className='ct__quastion__pic'/>
-                        <p>Введите текст вопроса</p>
-                        <input type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}} />
+                        <p className="ct__text__input__question">Введите текст вопроса</p>
+                        <textarea className="ct__input__question" type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}} />
                        
                         {!question.type?< div>Пока тип вопроса не выбран ответы добавить нельзя</div>
                        
@@ -374,21 +374,21 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                             {
                               question.type=="oneIsRight"
                               ?<div>
-                                <input type="radio" name={'oneIsRight'+iQ} value={answer.isRight} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
-                                <input type="text" placeholder='Введите ответ'value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
-                                <button onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
+                                <input className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.isRight} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
+                                <input className="ct__input__answer" type="text" placeholder='Введите ответ'value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
+                                <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
 
                               </div>
                             :question.type=="severalIsRight"
                             ?<div>
-                                <input type="checkbox" value={answer.isRight} name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
-                                <input type="text" placeholder='Введите ответ' value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
-                                <button onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
+                                <input className="ct__check__btn" type="checkbox" value={answer.isRight} name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
+                                <input className="ct__input__answer" type="text" placeholder='Введите ответ' value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
+                                <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
                             </div>
                             :
                             question.type=="typeAnswer"?
                             <div>
-                                <input type="text" placeholder='Напишите сюда правильный ответ' value={answer.rightCase} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
+                                <input className="ct__input__answer2" type="text" placeholder='Напишите сюда правильный ответ' value={answer.rightCase} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
                             </div>
                             : <div></div>
                             
@@ -400,7 +400,7 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                             }
                             {
                                 question.type==='severalIsRight'||question.type==='oneIsRight'?
-                                <button onClick={()=>addAnswer(iQ,question.type)}>
+                                <button className="ct__add__qustion__button" onClick={()=>addAnswer(iQ,question.type)}>
                                 Добавить ответ
                             </button>
                             : <div></div>
@@ -413,14 +413,14 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                            
                         
                         }
-                        <button onClick={()=>removeQuestion(question.id)}>Удалить вопрос</button>
+                        <button className="ct__remove__qustion__button" onClick={()=>removeQuestion(question.id)}>Удалить вопрос</button>
                         </div>
                         )   
                     }
                 </div>
                 </div>
             </div>
-            <button onClick={()=>setQuestions([...questions,{ type:'',
+            <button className="ct__add__test__question" onClick={()=>setQuestions([...questions,{ type:'',
             pic:'',
     qText:'',
     mark:1,

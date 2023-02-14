@@ -15,7 +15,7 @@ align-items: center;
 margin: 10px;
 margin-top: 10px;
 }
-.about__item:nth-child(2){
+.about__item:nth-child(1){
     justify-content: flex-start;
 }
 
@@ -23,7 +23,7 @@ margin-top: 10px;
 font-family: 'Montserrat', sans-serif;
 font-size: 25px;
 padding:5px;
-width: 80%;
+width: 1300px;
 }
 .about__item__img{
 width: 300px;

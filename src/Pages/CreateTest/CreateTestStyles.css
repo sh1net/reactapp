@@ -49,6 +49,7 @@ font-size: 20px;
 .ct__right button{
     width: 200px;
     align-self:center ;
+    margin-bottom:15px;
 }
 .ct__creater{
   
@@ -77,10 +78,10 @@ padding: 20px;
 flex-direction: column;
 }
 .ct_question{
-margin: 10px;
-background-color: antiquewhite;
-width: 100%;
-padding: 10px;
+    margin: 10px;
+    background-color: antiquewhite;
+    width: 100%;
+    padding: 10px;
 }
 
 .ct__quastion__pic{
@@ -92,4 +93,134 @@ padding: 10px;
 .ct__answer{
 display: flex;
 margin: 5px 0;
+}
+
+.ct__button__createtest{
+    border: 3px solid #EBA600;
+    font-family: sans-serif;
+    border-radius:10px;
+    font-size:24px;
+    box-shadow: 0px 2px 10px black;
+}
+
+.ct__select__items{
+    border: 3px solid #EBA600;
+    font-family: sans-serif;
+    border-radius:10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size:17px;
+    box-shadow: 0px 2px 5px black;
+}
+
+.ct__input__question{
+    border: 3px solid #EBA600;
+    font-family: sans-serif;
+    width:500px;
+    height:50px;
+    text-align:inherit;
+    border-radius:5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size:17px;
+    box-shadow: 0px 2px 5px black;
+    margin-bottom:14px;
+}
+
+.ct__input__answer{
+    border: 2px solid #EBA600;
+    font-family: sans-serif;
+    border-radius:5px;
+    margin-right: 10px;
+    margin-left: 5px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+    margin-bottom:10px;
+}
+
+.ct__input__answer2{
+    border: 2px solid #EBA600;
+    width:250px;
+    font-family: sans-serif;
+    border-radius:5px;
+    margin-right: 10px;
+    margin-left: 5px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+    margin-bottom:10px;
+}
+
+.ct__radio__btn{
+    margin-left: 5px;
+}
+
+.ct__check__btn{
+    margin-left: 5px;
+}
+
+.ct__delete__btn{
+    border: 2px solid #EBA600;
+    max-width: 100px;
+    font-family: sans-serif;
+    border-radius:10px;
+    margin-left: 10px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+}
+
+.ct__remove__qustion__button{
+    border: 2px solid #EBA600;
+    max-width: 150px;
+    font-family: sans-serif;
+    border-radius:10px;
+    margin-left: 10px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+}
+
+.ct__add__qustion__button{
+    border: 2px solid #EBA600;
+    max-width: 150px;
+    font-family: sans-serif;
+    border-radius:10px;
+    margin-left: 10px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+}
+
+.ct__test__name{
+    border: 2px solid #EBA600;
+    font-family: sans-serif;
+    border-radius:5px;
+    margin-right: 10px;
+    margin-left: 5px;
+    font-size:14px;
+    box-shadow: 0px 2px 4px black;
+    margin-bottom:10px;
+}
+
+.ct__text__input__question{
+    font-size: 20px;
+    margin-bottom: 8px;
+    margin-left:5px;
+}
+
+.ct__test__points{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.ct__test__name_1{
+    font-family: sans-serif;
+    font-size: 18px;
+    margin-right:8px;
+}
+
+.ct__add__test__question{
+    border: 3px solid #EBA600;
+    font-family: sans-serif;
+    max-width:200px;
+    border-radius:10px;
+    font-size:20px;
+    box-shadow: 0px 2px 10px black;
 }

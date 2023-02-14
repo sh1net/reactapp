@@ -28,9 +28,9 @@ function Main() {
       }, 1000);
     }, [])
    
-  return (isLoading&&!user.login
-    ?<Loader/>
-    :
+  return (///isLoading&&!user.login
+    ///?<Loader/>
+    ///:
     <div>
       <Header/>
         <Navbar/>
