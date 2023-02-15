@@ -87,14 +87,14 @@ function editUserTest(id){
               </div> 
             </div>
            <div className="test__item__date">
-            <p>Cоздан:</p>
+            <p>Откроется:</p>
            {new Date(userTest.openTime).getDate()<10
               ?  <div>0{new Date(userTest.openTime).getDate()}</div>
               :<div>{new Date(userTest.openTime).getDate()}</div>
               }
               .
               {new Date(userTest.openTime).getMonth()<10
-              ?  <div>0{new Date(userTest.openTime).getMonth()}</div>
+              ?  <div>0{(new Date(userTest.openTime).getMonth())+1}</div>
               :<div>{new Date(userTest.openTime).getMonth()}</div>
               }
               .
