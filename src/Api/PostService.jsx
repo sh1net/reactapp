@@ -48,10 +48,11 @@ export default class PostService{
   
 
 static  setUserTest(currentTest,userTests,id){
-  console.log("dsds")
   set(ref(db,'/users/'+id+'/MyTests'),[...userTests,currentTest])
 }
-
+static  setUserTests(userTests,id){
+  set(ref(db,'/users/'+id+'/MyTests'),[...userTests])
+}
 static  async getUserTestsById(id){
   const data=await  get(child(ref(db),'/users/'+id+'/MyTests')).then(snapshot=>{
     if (snapshot.exists()) {

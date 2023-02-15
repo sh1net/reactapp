@@ -48,9 +48,11 @@ const navigate=useNavigate();
 
     const [questions, setQuestions] = useState([
      
-        ])
+    ])
  
   const [currentTest, setCurrentTest] = useState({
+    id:Date.now().toString(),
+    editMode:false,
     author:'',
     title:'',
     openTime:'',
@@ -69,9 +71,52 @@ const navigate=useNavigate();
     }
     ],
   })
+
+  useEffect(() => {
+    if(userTests!==null){
+      userTests.forEach((userTest)=>{
+        if(userTest.editMode===true) {
+          setCurrentTest({...userTest,questions:[]})
+          setQuestions(userTest.questions);
+          setTestOpenTime({hour:new Date(userTest.openTime).getHours()<10
+            ?"0"+new Date(userTest.openTime).getHours()
+            :new Date(userTest.openTime).getHours()+"",
+            minute:new Date(userTest.openTime).getMinutes()<10
+            ?"0"+new Date(userTest.openTime).getMinutes()
+            :new Date(userTest.openTime).getMinutes()+""})
+
+            setTestCloseTime({hour:new Date(userTest.closeTime).getHours()<10
+              ?"0"+new Date(userTest.closeTime).getHours()
+              :new Date(userTest.closeTime).getHours()+"",
+              minute:new Date(userTest.closeTime).getMinutes()<10
+              ?"0"+new Date(userTest.closeTime).getMinutes()
+              :new Date(userTest.closeTime).getMinutes()+""})
+
+              setTestDurationTime({hour:new Date(userTest.durationTime).getHours()<10
+                ?"0"+new Date(userTest.durationTime).getHours()
+                :new Date(userTest.durationTime).getHours()+"",
+                minute:new Date(userTest.durationTime).getMinutes()<10
+                ?"0"+new Date(userTest.durationTime).getMinutes()
+                :new Date(userTest.durationTime).getMinutes()+""})
+    };})
+    }
+ 
+  }, [])
+  
+useEffect(() => {
+  if(currentTest.author!==''&&currentTest.editMode===false){
+    console.log(userTests)
+    const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id;
+    PostService.setUserTests(userTests,id);
+      navigate('/myTests');
+  }
+}, [currentTest.editMode])
+
+
   useEffect(() => {
     
-    if(currentTest.author!==''){
+    if(currentTest.author!==''&&currentTest.editMode===false&&currentTest.title!==''){
+      console.log(currentTest);
       const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id;
       setUserTests([...userTests,currentTest]);
       PostService.setUserTest(currentTest,userTests,id)
@@ -82,7 +127,16 @@ const navigate=useNavigate();
       }).then((val)=>{
         navigate('/myTests');
       })
-      
+    }
+    if(currentTest.author!==''&&currentTest.editMode===true){
+      console.log(currentTest)
+      setUserTests([...userTests.map((userTest)=>userTest.id==currentTest.id?{...currentTest,editMode:false}:userTest)]);
+      setCurrentTest({...currentTest,editMode:false,title:''});
+      swal({
+        icon:"success",
+        title:"Отлично!",
+        text:"Тест '"+currentTest.title+ "' успешно отредактирован!"
+      })
     }
   }, [currentTest])
 
@@ -138,7 +192,7 @@ const navigate=useNavigate();
 
 
   function chooseRightCaseSeveral(iQ,iA,e){
-  
+  console.log("dsds")
    
     if(e.target.value==='true') {setQuestions([...questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,isRight:false}:answer)}:question)])}
     else setQuestions([...questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,isRight:true}:answer)}:question)])
@@ -270,7 +324,7 @@ close.setHours(+testCloseTime.hour);
 close.setMinutes(+testCloseTime.minute);
 duration.setHours(+testDurationTime.hour);
 duration.setMinutes(+testDurationTime.minute);
-
+console.log(questions);
 setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime(),durationTime:duration.getTime(),questions:questions,author:localStorage.getItem('userLogin')});
 }
 
@@ -326,7 +380,7 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                     </div>
                     
                 </div>
-                <button onClick={()=>{confirmTest()}} className="ct__button__createtest">Создать тест</button>
+                <button onClick={()=>{confirmTest()}} className="ct__button__createtest">{currentTest.editMode?"Отредактировать":"Создать тест"}</button>
             </div>
             
             <hr style={{width:'1px',height:'800px',backgroundColor:'#000'}}/>
@@ -334,7 +388,7 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
             <div className="ct__right">
             <div className="ct__creater">
                 <div className="ct__creater__container">
-                    <text className="ct__test__name_1">Название теста</text>
+                    <div className="ct__test__name_1">Название теста</div>
                 <input className="ct__test__name" type="text" value={currentTest.title} onChange={(e)=>setCurrentTest({...currentTest,title:e.target.value})} />
                 {questions.length!==0
                 ?<p className="ct__test__points"> Баллы за весь тест {questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</p>
@@ -353,8 +407,8 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                         <select className="ct__select__items" value={question.mark} onChange={(e)=>choseQuestionMark(iQ,e.target.value)} >
                           <option value={""}  disabled={true}>Выберите балл </option>
                            <option value={1}>1 балл</option>
-                            <option value={2}>2 балл</option>
-                            <option value={3}>3 балл</option>
+                            <option value={2}>2 балла</option>
+                            <option value={3}>3 балла</option>
                         </select>
                         {!question.pic
                         ?<p>Вы можете установить картинку к тесту</p>
@@ -363,7 +417,7 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                         <input className="file__upload__button" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
                         <img src={question.pic} alt="" className='ct__quastion__pic'/>
                         <p className="ct__text__input__question">Введите текст вопроса</p>
-                        <textarea className="ct__input__question" type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}} />
+                        <textarea name="postContent" className="ct__input__question" type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}}/>
                        
                         {!question.type?< div>Пока тип вопроса не выбран ответы добавить нельзя</div>
                        
@@ -374,14 +428,14 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                             {
                               question.type=="oneIsRight"
                               ?<div>
-                                <input className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.isRight} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
+                                <input checked={answer.isRight?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.isRight} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
                                 <input className="ct__input__answer" type="text" placeholder='Введите ответ'value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
                                 <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
 
                               </div>
                             :question.type=="severalIsRight"
                             ?<div>
-                                <input className="ct__check__btn" type="checkbox" value={answer.isRight} name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
+                                <input className="ct__check__btn" type="checkbox" value={answer.isRight} checked={answer.isRight?true:false}  name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
                                 <input className="ct__input__answer" type="text" placeholder='Введите ответ' value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
                                 <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
                             </div>

@@ -19,10 +19,6 @@ function Navbar() {
       const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id
         fetchUserById(id);
     }
-
-    
-  
-    
   }, [])
   
     
