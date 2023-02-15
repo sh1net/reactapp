@@ -1,0 +1,76 @@
+.user__profile__main{
+    min-width:1000px;
+}
+
+.user__profile__bg{
+    margin: 0 auto;
+    display: flex;
+    padding:20px;
+    flex-direction: column;
+    background-color: rgb(216, 216, 216);
+    justify-content: center;
+    width: 95%;
+    
+}
+
+.user__profile__general{
+    display:flex;
+    flex-direction:column;
+    max-width: 45%;
+}
+
+.user__data__preview{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user__data__preview{
+    display:flex;
+    flex-direction: row;
+}
+
+.user__profile__data{
+    display:flex;
+    flex-direction: column;
+    margin-left:20px;
+}
+
+.user__profile__icon{
+    border: 4px solid #EBA600;
+    width: 200px;
+    height:200px;
+    background-color: white;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 50%;
+}
+.user__photo__select{
+    align-self: flex-start;
+    margin-top:20px;
+    margin-left:35px;
+    margin-bottom:20px;
+    width:120px;
+    border: 2px solid #EBA600;
+    border-radius: 10px;
+    background-color: #EBA600;
+}
+
+.user__about__teaxtarea{
+    max-width: 95%;
+    border: 2px solid #EBA600;
+    border-radius: 10px;
+    background-color: white;
+    min-height: 40px;
+    min-width: 250px;
+    box-shadow: inset 2px 2px 3px -1px rgba(0, 0, 0, 0.6);
+}
+
+.user__about__data{
+    margin-bottom:20px;
+    border: 2px solid #EBA600;
+    border-radius: 10px;
+    height:20px;
+    width:150px;
+    background-color: white;
+    box-shadow: inset 1px 1px 3px -1px rgba(0, 0, 0, 0.6);
+}

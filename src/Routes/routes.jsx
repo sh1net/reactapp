@@ -9,6 +9,7 @@ import AboutUs from "../Pages/AboutUs/AboutUs"
 import MyTests from "../Pages/MyTests/MyTests";
 import PassTest from "../Pages/PassTest/PassTest";
 import CreateTest from "../Pages/CreateTest/CreateTest";
+import UserProfile from "../Pages/UserProfile/UserProfile";
 
 export const privateRoutes=[
 
@@ -17,7 +18,8 @@ export const privateRoutes=[
     {path:"/about",element:<AboutUs/>,exact:true},
     {path:"/myTests",element:<MyTests/>,exact:true},
     {path:"/testCreater",element:<CreateTest/>,exact:true},
-    {path:"/passTests",element:<PassTest/>,exact:true}
+    {path:"/passTests",element:<PassTest/>,exact:true},
+    {path:"/myProfile",element:<UserProfile/>,exact:true}
 
 ]
 

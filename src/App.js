@@ -8,6 +8,7 @@ import PostService from "./Api/PostService";
 import Loader from "./Components/Loader/Loader";
 import { useFetching } from "./hooks/useFething";
 import { testContext } from "./Context/useContext";
+import './main.css';
 function App(){
   const [isAuth, setIsAuth] = useState(false);
   const [users, setUsers] = useState(null);

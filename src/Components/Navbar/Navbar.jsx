@@ -48,8 +48,10 @@ function Navbar() {
     <NavLink to ='/support' className='nav__link'>Связаться с нами</NavLink>
     </div>
     <div className="navbar__right">
-      <div className='nav__user'>{user.login}</div>
-      <div className='user__icon'></div>
+      <NavLink to ='/myProfile' className="nav__user__profile">
+          <div className='nav__user'>{user.login}</div>
+          <div className='user__icon'></div>
+      </NavLink>
    <img src={exitIcon} alt="" className="exit__icon" onClick={exit} />
    </div>
   </div> 

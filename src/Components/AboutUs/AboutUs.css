@@ -1,4 +1,5 @@
 .about__container{
+    min-width: 99vh;
 margin: 0 auto;
 display: flex;
 padding:20px;
