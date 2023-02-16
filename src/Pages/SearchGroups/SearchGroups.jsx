@@ -87,3 +87,4 @@ function joinGroup(id){
 }
 
 export default SearchGroups
+

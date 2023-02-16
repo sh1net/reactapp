@@ -2,8 +2,12 @@ import React from 'react'
 import Header from '../../Components/Header/Header'
 import Navbar from '../../Components/Navbar/Navbar'
 import './UserProfile.css'
+import { useContext } from 'react';
+import { authContext } from '../../Context/useContext';
 
 function UserProfile() {
+    const {user,setUser}=useContext(authContext);
+    console.log(user);
   return (
     <div >
         <Header/>
@@ -13,9 +17,9 @@ function UserProfile() {
                 <div className="user__data__preview">
                     <div className="user__profile__icon"></div>
                     <div className="user__profile__data">
-                        Имя<div className="user__about__data"></div>
-                        Почта<div className="user__about__data"></div>
-                        Пороль<div className="user__about__data"></div>
+                        Имя<div className="user__about__data">{user.login}</div>
+                        Почта<div className="user__about__data">{user.email}</div>
+                        Пароль<div className="user__about__data">{user.password}</div>
                     </div>
                 </div>
 
