@@ -19,7 +19,7 @@ function Main() {
     setUser(fetchedUserById);
     })
   
-
+    console.log(user);
     useEffect(() => {
      
       setTimeout(() => {

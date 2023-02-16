@@ -62,12 +62,28 @@ function editUserTest(id){
         <div className="my__tests__bg">
           <div className="my__tests__container">
             {userTests.length===0
-            ?<h1 style={{textAlign:'center',fontFamily:'sans-serif'}}>У вас нет тестов :( </h1>
+            ?<h1 style={{textAlign:'center',fontFamily:'sans-serif'}}>У вас нет тестов (」°ロ°)」 </h1>
             :userTests.map((userTest,i)=><div key={userTest.openTime} className='my__tests__item'>
               <div className="test__item__header">
               <div className="test__item__title">{userTest.title}</div>
               <div className="test__item__open-close__time">
-              {new Date(userTest.openTime).getHours()<10
+              
+              <div className="test__item__date">
+              <p>Откроется:</p>
+                {new Date(userTest.openTime).getDate()<10
+                ?  <div>0{new Date(userTest.openTime).getDate()}</div>
+                :<div>{new Date(userTest.openTime).getDate()}</div>
+                }
+                .
+                {new Date(userTest.openTime).getMonth()<10
+                ?  <div>0{(new Date(userTest.openTime).getMonth())+1}</div>
+                :<div>{new Date(userTest.openTime).getMonth()}</div>
+                }
+                .
+                {new Date(userTest.openTime).getFullYear()}
+              </div>
+              <div className='date__time'>
+                {new Date(userTest.openTime).getHours()<10
               ?  <div>0{new Date(userTest.openTime).getHours()}</div>
               :<div>{new Date(userTest.openTime).getHours()}</div>
               }
@@ -84,30 +100,19 @@ function editUserTest(id){
               ?  <div>0{new Date(userTest.closeTime).getMinutes()}</div>
               :<div>{new Date(userTest.closeTime).getMinutes()}</div>
               }
+              </div>
+              
               </div> 
             </div>
-           <div className="test__item__date">
-            <p>Откроется:</p>
-           {new Date(userTest.openTime).getDate()<10
-              ?  <div>0{new Date(userTest.openTime).getDate()}</div>
-              :<div>{new Date(userTest.openTime).getDate()}</div>
-              }
-              .
-              {new Date(userTest.openTime).getMonth()<10
-              ?  <div>0{(new Date(userTest.openTime).getMonth())+1}</div>
-              :<div>{new Date(userTest.openTime).getMonth()}</div>
-              }
-              .
-              {new Date(userTest.openTime).getFullYear()}
-           </div>
+           
            <div className="test__item__buttons">
             <div className="test__item__buttons__left">
-            <button onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
-            <button onClick={()=>{removeTest(userTest.id,userTest.title)}}>Удалить</button>
+            <button className="my__test__button" onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
+            <button className="my__test__button" onClick={()=>{removeTest(userTest.id,userTest.title)}}>Удалить</button>
             </div>
             <div className="test__item__selector">
               <p>Для группы:</p>
-              <select >
+              <select className="my__test__select">
                 <option disabled={true}>Выберите группа для теста</option>
               </select>
             </div>
