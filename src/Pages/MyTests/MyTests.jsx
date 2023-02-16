@@ -62,7 +62,7 @@ function editUserTest(id){
         <div className="my__tests__bg">
           <div className="my__tests__container">
             {userTests.length===0
-            ?<h1 style={{textAlign:'center',fontFamily:'sans-serif'}}>У вас нет тестов (」°ロ°)」 </h1>
+            ?<h1 style={{textAlign:'center',fontFamily:'sans-serif'}}>У вас нет тестов ☠ </h1>
             :userTests.map((userTest,i)=><div key={userTest.openTime} className='my__tests__item'>
               <div className="test__item__header">
               <div className="test__item__title">{userTest.title}</div>

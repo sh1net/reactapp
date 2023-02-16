@@ -28,25 +28,31 @@ useEffect(() => {
   fetchGroups();
 }, [])
 
-const searchedGroups=
+useEffect(() => {
+  if(groups!==undefined&&groups!==null)
+  PostService.setGroups(groups);
+}, [groups])
 
-    useMemo(() => {
-    if(groups){
+
+
+const searchedGroups=useMemo(() => {
+     
+    if(groups!==undefined&&groups!==null){
       
       return groups.filter((group)=>group.groupName.toLowerCase().includes(search.toLowerCase()))
     }
- }, [search]);
+ }, [search,groups]);
 
 
 
 
 
 function joinGroup(id){
-  setGroups([...groups.map(group=>group.id==id?{...group,members:[...group.member,localStorage.getItem('userLogin')]}:group)])
+  setGroups([...groups.map(group=>group.id==id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group)])
 }
 
 
-  return (isLoading
+  return (isLoading||searchedGroups===undefined
     ?<Loader/>
     :
     <div>
@@ -67,7 +73,7 @@ function joinGroup(id){
               ? <p>Вы вступили</p>
               :group.admin===localStorage.getItem('userLogin')
               ? <p>Вы админ этой группы</p>
-              : <button onClick={()=>joinGroup(group.id)}></button>
+              : <button onClick={()=>joinGroup(group.id)}>Вступить</button>
             }
           </div>
             )}
@@ -81,3 +87,4 @@ function joinGroup(id){
 }
 
 export default SearchGroups
+
