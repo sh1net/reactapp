@@ -8,30 +8,37 @@ import PostService from "./Api/PostService";
 import Loader from "./Components/Loader/Loader";
 import { useFetching } from "./hooks/useFething";
 import { testContext } from "./Context/useContext";
+import { groupsContext } from "./Context/useContext";
 import './main.css';
 function App(){
   const [isAuth, setIsAuth] = useState(false);
   const [users, setUsers] = useState(null);
   const [userTests, setUserTests] = useState(null)
-   
+  const [groups,setGroups]=useState(null)
   
   const [fetchUsers,isLoading]=useFetching(async()=>{
    const fetchedUsers= await PostService.getUsers();
     setUsers(fetchedUsers);
   })
 
+  const [fetchGroups]=useFetching(async()=>{
+    const fetchedGroups= await PostService.getGroups();
+     setGroups(fetchedGroups);
+   })
+
   const [user, setUser] = useState({
     login:'',
     password:'',
     email:'',
     id:0,
-    groupMember:''
+    groups:[]
   })
 
  
 
   useEffect(() => {
     fetchUsers();
+    fetchGroups();
   }, [])
 
 
@@ -46,11 +53,13 @@ function App(){
   <Loader/>
   :
     <authContext.Provider value={{isAuth,setIsAuth,users,setUsers,user,setUser}}>
+      <groupsContext.Provider value={{groups,setGroups}}>
         <testContext.Provider value={{userTests,setUserTests}}>
         <BrowserRouter >
         <AppRouter/>
         </BrowserRouter>
         </testContext.Provider>
+        </groupsContext.Provider>
       </authContext.Provider>
   )
 }

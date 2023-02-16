@@ -192,7 +192,7 @@ useEffect(() => {
 
 
   function chooseRightCaseSeveral(iQ,iA,e){
-  console.log("dsds")
+ 
    
     if(e.target.value==='true') {setQuestions([...questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,isRight:false}:answer)}:question)])}
     else setQuestions([...questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,isRight:true}:answer)}:question)])

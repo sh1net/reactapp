@@ -70,6 +70,28 @@ static  async getUserTestsById(id){
  return data;
 }
 
+static async getGroups(){
+  const data=await get(child(ref(db),'/groups')).then(snapshot=>{
+
+    if (snapshot.exists()) {
+
+      return snapshot.val();
+
+    } else  return []
+    
+
+  }).catch((error) => {
+
+    console.error(error);
+
+  });
+  return data;
+}
+
+static async setGroups(groups){
+  set(ref(db,'/groups'),groups)
+}
+
 static  async uploadTestImg(file){
 const testImgRef=sRef(storage,'testImages/'+file.name);
 const uploadTask=uploadBytesResumable(testImgRef,file);

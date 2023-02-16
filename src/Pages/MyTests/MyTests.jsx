@@ -108,7 +108,7 @@ function editUserTest(id){
             <div className="test__item__selector">
               <p>Для группы:</p>
               <select >
-                <option disabled={true}>Выберите группа для теста</option>
+                <option disabled={true}>Выберите тестируемую группу</option>
               </select>
             </div>
             </div>

@@ -5,7 +5,7 @@ import './UserProfile.css'
 
 function UserProfile() {
   return (
-    <div className="user__profile__main">
+    <div >
         <Header/>
         <Navbar/>
         <div className="user__profile__bg">
@@ -18,9 +18,12 @@ function UserProfile() {
                         Пороль<div className="user__about__data"></div>
                     </div>
                 </div>
+
                 <button className="user__photo__select">Выбрать фото</button>
                 <textarea className="user__about__teaxtarea" placeholder="Напишите о себе"></textarea>
             </div>
+            <hr style={{width:'100%',height:'1px',margin:'50px 0',backgroundColor:'#000'}}/>
+            <div className='user__statistic'></div>
         </div>
         
         
