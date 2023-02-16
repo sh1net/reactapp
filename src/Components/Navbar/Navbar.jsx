@@ -9,8 +9,8 @@ import PostService from '../../Api/PostService';
 import { useFetching } from '../../hooks/useFething';
 function Navbar() {
   const {setIsAuth,user,setUser,users}=useContext(authContext);
-  const [fetchUserById]=useFetching(async(login)=>{
-    const fetchedUserById=await PostService.getUserById(login);
+  const [fetchUserById]=useFetching(async(id)=>{
+    const fetchedUserById=await PostService.getUserById(id);
     setUser(fetchedUserById);
     })
 
@@ -39,7 +39,12 @@ function Navbar() {
       <Link to ='/passTests'  className='drop__link'>Пройти тест</Link>
     </div>
     </div>
-  
+    <div className='nav__link dropdown' to='/'>Группы
+    <div className="dropdown-content">
+      <Link  to ='/myGroups' className='drop__link'>Мои группы</Link>
+      <Link to ='/searchGroups'  className='drop__link'>Поиск группы</Link>
+    </div>
+    </div>
     <NavLink className='nav__link' to='/about'>О нас</NavLink>
     <NavLink to ='/support' className='nav__link'>Связаться с нами</NavLink>
     </div>

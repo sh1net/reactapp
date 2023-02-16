@@ -10,7 +10,8 @@ import MyTests from "../Pages/MyTests/MyTests";
 import PassTest from "../Pages/PassTest/PassTest";
 import CreateTest from "../Pages/CreateTest/CreateTest";
 import UserProfile from "../Pages/UserProfile/UserProfile";
-
+import MyGroups from "../Pages/MyGroups/MyGroups";
+import SearchGroups from "../Pages/SearchGroups/SearchGroups";
 export const privateRoutes=[
 
     {path:"/main",element:<Main/>,exact:true},
@@ -19,7 +20,9 @@ export const privateRoutes=[
     {path:"/myTests",element:<MyTests/>,exact:true},
     {path:"/testCreater",element:<CreateTest/>,exact:true},
     {path:"/passTests",element:<PassTest/>,exact:true},
-    {path:"/myProfile",element:<UserProfile/>,exact:true}
+    {path:"/myProfile",element:<UserProfile/>,exact:true},
+    {path:"/myGroups",element:<MyGroups/>,exact:true},
+    {path:"/searchGroups",element:<SearchGroups/>,exact:true}
 
 ]
 
