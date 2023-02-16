@@ -1,0 +1,23 @@
+.search__groups__bg{
+    margin: 0 auto;
+    display: flex;
+    padding:20px;
+    flex-direction: column;
+    background-color: rgb(216, 216, 216);
+    justify-content: center;
+    width: 95%;
+}
+
+.search__groups__container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 700px;
+}
+
+.search__groups__item{
+    width: 60%;
+    background-color: antiquewhite;
+    margin:10px 0;
+}
