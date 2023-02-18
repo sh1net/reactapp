@@ -3,7 +3,8 @@
     padding:20px;
     background-color: rgb(216, 216, 216);
     width: 95%;
-    height: 96vh;
+    min-height:30%;
+    max-height:100%;
 }
 
 .pass__test__container{
@@ -35,4 +36,17 @@ width: 100%;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0px 2px 10px #000;
+}
+
+.group__tests__name{
+    font-weight:bold;
+    font-family:sans-serif;
+    margin-top:5px;
+    font-size:18.35px;
+}
+
+.tests__item__title{
+    font-weight:bold;
+    font-family:sans-serif;
+    font-size:20px;
 }

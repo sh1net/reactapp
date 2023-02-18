@@ -138,8 +138,8 @@ function checkGroup(groupId,userTestId){
               :<div>{new Date(userTest.closeTime).getMinutes()}</div>
               }
               </div>
-              
               </div> 
+              
             </div>
            
            <div className="test__item__buttons">
@@ -150,7 +150,7 @@ function checkGroup(groupId,userTestId){
             <div className="test__item__selector">
            
             <GroupsModal visible={visible.isVisible} setVisible={setVisible} groups={groups} checkGroup={checkGroup} addTestGroup={addTestGroup} userTest={visible.userTest} />
-              <button onClick={()=>setVisible({isVisible:true,userTest:userTest})}>Выбор групп для тестирования</button>
+              <button className="mt__button__groups" onClick={()=>setVisible({isVisible:true,userTest:userTest})}>Выбор групп для тестирования</button>
             </div>
             </div>
             </div>
