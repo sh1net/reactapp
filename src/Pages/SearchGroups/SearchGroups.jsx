@@ -15,13 +15,15 @@ function SearchGroups() {
   const [search, setSearch] = useState('')
   
   const [fetchGroups,isLoading]=useFetching(async()=>{
+      
+      
       const fetchedGroups= await PostService.getGroups();
       if(fetchedGroups===undefined){
         setGroups([])
       }
       else
-      
        setGroups(fetchedGroups);
+      
      })
 
 useEffect(() => {
@@ -59,26 +61,24 @@ function joinGroup(id){
       <Header/>
       <Navbar/>
       <div className='search__groups__bg'>
-      <input type="text" placeholder='Введите название группы' value={search} onChange={(e)=>setSearch(e.target.value)} />
+      <input className="sg__titles__search" type="text" placeholder='Введите название группы' value={search} onChange={(e)=>setSearch(e.target.value)} />
 
         {groups.length===0
         ?<h1>Группы не найдены</h1>
-        : 
-            <div className="search__groups__container">
+        :<div className="search__groups__container">
           {searchedGroups.map(group=> <div key={group.id} className='search__groups__item'>
-            <div className="sg__title">{group.groupName}</div>
-            <div className="sg__admin">{group.admin}</div>
-            <p>Участников: {group.members.length-1}шт.</p>
+            <div className="sg__title" style={{marginBottom:"5px",fontWeight:"bold",fontFamily:"sans-serif"}}>{group.groupName}</div>
+            <div className="sg__admin"><li>Админ: {group.admin}</li></div>
+            <p ><li>Участников: {group.members.length-1}</li></p>
             {group.members.find(member=>member===localStorage.getItem('userLogin'))&&group.admin!==localStorage.getItem('userLogin')
-              ? <p>Вы вступили</p>
+              ? <p style={{textAlign:"right",fontFamily:"sans-serif"}}>Вы вступили</p>
               :group.admin===localStorage.getItem('userLogin')
-              ? <p>Вы админ этой группы</p>
-              : <button onClick={()=>joinGroup(group.id)}>Вступить</button>
+              ? <p style={{textAlign:"right",fontFamily:"sans-serif"}}>Вы админ этой группы</p>
+              : <button className="sg__neter__btn" onClick={()=>joinGroup(group.id)}>Вступить</button>
             }
           </div>
             )}
         </div>
-       
         }
        
       </div>

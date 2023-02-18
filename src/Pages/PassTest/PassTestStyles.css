@@ -3,7 +3,8 @@
     padding:20px;
     background-color: rgb(216, 216, 216);
     width: 95%;
-    height: 96vh;
+    min-height:30%;
+    max-height:100%;
 }
 
 .pass__test__container{
@@ -38,15 +39,27 @@ width: 100%;
 }
 
 
+.group__tests__name{
+    font-weight:bold;
+    font-family:sans-serif;
+    margin-top:5px;
+    font-size:18.35px;
+}
+
+.tests__item__title{
+    font-weight:bold;
+    font-family:sans-serif;
+    font-size:20px;
+}
 
 
 .pass__test__button{
-height: 50px;
-width: 100px;
-background-color: #EBA600;
-
-font-size:20px;
-border-radius: 6px;
-border:2px solid #EBA600;
-box-shadow: 0px 0px 2px black;
-}
+    height: 50px;
+    width: 100px;
+    background-color: #EBA600;
+    
+    font-size:20px;
+    border-radius: 6px;
+    border:2px solid #EBA600;
+    box-shadow: 0px 0px 2px black;
+    }

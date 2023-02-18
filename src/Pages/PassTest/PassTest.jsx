@@ -65,11 +65,12 @@ useEffect(() => {
           <div className="pass__test__container">
         {groups.map(group=>group.members.find(member=>member===localStorage.getItem('userLogin'))?
         <div key={group.id} className='group__tests'>
-          <div className='group__tests__name'>{group.groupName}</div>
+          <div className='group__tests__name'>Группа: {group.groupName}</div>
           {group.tests!==undefined?group.tests.map(userTest=>
           <div key={userTest.id} className="group__tests__item">
             <div className="tests__item__title">{userTest.title}</div>
-            <div className="test__item__open-close__time">
+            <div className="test__item__close-open__time">
+              
               <div className="test__item__date">
               <p>Откроется</p>
                 {new Date(userTest.openTime).getDate()<10
