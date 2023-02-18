@@ -22,8 +22,11 @@ function App(){
   })
 
   const [fetchGroups]=useFetching(async()=>{
-    const fetchedGroups= await PostService.getGroups();
-     setGroups(fetchedGroups);
+    setTimeout(async function f() {
+      const fetchedGroups= await PostService.getGroups();
+      setGroups(fetchedGroups);
+      setTimeout(f,15000)
+    }, 100);
    })
 
   const [user, setUser] = useState({

@@ -36,3 +36,17 @@ width: 100%;
     padding: 20px;
     box-shadow: 0px 2px 10px #000;
 }
+
+
+
+
+.pass__test__button{
+height: 50px;
+width: 100px;
+background-color: #EBA600;
+
+font-size:20px;
+border-radius: 6px;
+border:2px solid #EBA600;
+box-shadow: 0px 0px 2px black;
+}

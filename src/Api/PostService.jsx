@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { storage } from "../firebase";
 import { uploadBytesResumable, getDownloadURL, ref as sRef } from "firebase/storage";
 
-import {get,set,ref,child} from "firebase/database"
+import {get,set,ref,push,child} from "firebase/database"
 
 export default class PostService{
     static async getUsers(){
@@ -89,8 +89,11 @@ static async getGroups(){
 }
 
 static async setGroups(groups){
-  set(ref(db,'/groups'),groups)
+ set(ref(db,'/groups'),groups)
 }
+
+
+
 
 static  async uploadTestImg(file){
 const testImgRef=sRef(storage,'testImages/'+file.name);

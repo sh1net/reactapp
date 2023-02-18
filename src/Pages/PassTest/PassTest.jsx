@@ -44,8 +44,15 @@ useEffect(() => {
   const navigate=useNavigate();
   
   function dateDiff(open,now=new Date()){
-    console.log(new Date(open.getTime()-now.getTime()).getTime())
-    return new Date((open-now)/(60 * 60 * 24 * 1000));
+    return open-now;
+  }
+
+  function dateHours(hours){
+    return Math.floor(Math.abs(hours)/3600000);
+  }
+
+  function dateMinutes(minutes){
+    return Math.floor(Math.abs(minutes/60000)-(dateHours(minutes)*60));
   }
 
   return (isLoading
@@ -63,7 +70,6 @@ useEffect(() => {
           <div key={userTest.id} className="group__tests__item">
             <div className="tests__item__title">{userTest.title}</div>
             <div className="test__item__open-close__time">
-              
               <div className="test__item__date">
               <p>Откроется</p>
                 {new Date(userTest.openTime).getDate()<10
@@ -78,16 +84,31 @@ useEffect(() => {
                 .
                 {new Date(userTest.openTime).getFullYear()}
               </div>
-              <div className='date__time'>
-              <p>До открытия</p>
-                {dateDiff(new Date(userTest.openTime)).getHours()<10
-              ?  <div>0{dateDiff(new Date(userTest.openTime)).getHours()}</div>
-              :<div>{dateDiff(new Date(userTest.openTime)).getHours()}</div>
-              }
-              :  {dateDiff(new Date(userTest.openTime)).getMinutes()<10
-              ?  <div>0{dateDiff(new Date(userTest.openTime)).getMinutes()}</div>
-              :<div>{dateDiff(new Date(userTest.openTime)).getMinutes()}</div>
-              }
+              <button className='pass__test__button' disabled={dateDiff(new Date(userTest.openTime))<=0&&dateDiff(new Date(userTest.openTime))<=0?false:true}>Пройти</button>
+              <div>
+                {dateDiff(new Date(userTest.openTime))<=0&&dateDiff(new Date(userTest.openTime))<=0
+                ?<div className='date__time'><p>До закрытия</p>
+                  {dateHours(dateDiff(new Date(userTest.closeTime)))<10
+                  ?  <div>0{dateHours(dateDiff(new Date(userTest.closeTime)))}</div>
+                  :<div>{dateHours(dateDiff(new Date(userTest.closeTime)))}</div>
+                  }
+                  :  {dateMinutes(dateDiff(new Date(userTest.closeTime)))<10
+                  ?  <div>0{dateMinutes(dateDiff(new Date(userTest.closeTime)))}</div>
+                  :<div>{dateMinutes(dateDiff(new Date(userTest.closeTime)))}</div>
+                  }
+                </div>
+                :<div className='date__time'>
+                  <p>До открытия</p>
+                  {dateHours(dateDiff(new Date(userTest.openTime)))<10
+                  ?  <div>0{dateHours(dateDiff(new Date(userTest.openTime)))}</div>
+                  :<div>{dateHours(dateDiff(new Date(userTest.openTime)))}</div>
+                  }
+                  :  {dateMinutes(dateDiff(new Date(userTest.openTime)))<10
+                  ?  <div>0{dateMinutes(dateDiff(new Date(userTest.openTime)))}</div>
+                  :<div>{dateMinutes(dateDiff(new Date(userTest.openTime)))}</div>
+                  }
+                  </div>
+                }
             
               </div>
               
