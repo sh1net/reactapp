@@ -1,0 +1,29 @@
+.groupsModal{
+position: fixed;
+top: 0;
+bottom: 0;
+right: 0;
+left: 0;
+display: none;
+background-color: rgba(0, 0, 0, 0.603);
+}
+
+.groupsModal.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.groupsModalContent{
+padding: 25px;
+background-color: #fff;
+border-radius: 25px;
+min-width: 350px;
+max-height: 250px;
+
+}
+
+.groupsModalContentContainer{
+    overflow-y: scroll;
+    max-height: 200px;
+}

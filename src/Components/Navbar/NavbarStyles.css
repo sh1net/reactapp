@@ -108,9 +108,7 @@
     display: block;
     text-align: left;
   }
-  .dropdown-content:last-child{
-    border-bottom:1px solid #340F0F
-  }
+ 
 
   .drop__link:hover {
     background-color: #ca5313f7;
