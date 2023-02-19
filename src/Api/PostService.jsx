@@ -103,13 +103,32 @@ static async removeGroup(id){
   const groups=await PostService.getGroups();
   set(ref(db,'/groups'),groups.filter(group=>group.id!==id))
  }
-
+ static async joinGroup(id){
+  const groups=await PostService.getGroups();
+  set(ref(db,'/groups'),groups.map(group=>group.id===id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group))
+ }
  static async setGroup(group){
   const groups=await PostService.getGroups();
 
   set(ref(db,'groups/'+(groups.length)),group)
  }
 
+ static async RemoveTestFromGroup(groupId,userTestId){
+  const groups=await PostService.getGroups();
+  set(ref(db,'groups/'),groups.map(group=>group.id===groupId?{...group,tests:[...group.tests.filter(userTest=>userTest.id!==userTestId)]}:group))
+ }
+
+
+ static async addTestToGroup(groupId,userTestId,userTests){
+  const groups=await PostService.getGroups();
+  set(ref(db,'groups/'),groups.map(group=>group.id===groupId?{...group,tests:group.tests?[...group.tests,{...userTests.find(userTest=>userTest.id===userTestId)}]:[{...userTests.find(userTest=>userTest.id===userTestId)}]}:group))
+ }
+
+
+ static async leaveFromGroup(id){
+  const groups=await PostService.getGroups();
+  set(ref(db,'groups/'),groups.map(group=>group.id===id?{...group,members:group.members.filter(member=>member!==localStorage.getItem('userLogin'))}:group))
+ }
 
 
 static  async uploadTestImg(file){

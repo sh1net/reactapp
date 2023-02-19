@@ -74,10 +74,12 @@ useEffect(() => {
 function addTestGroup(groupId,userTestId,e){
   if(e.target.checked){
     setGroups([...groups.map(group=>group.id===groupId?{...group,tests:group.tests?[...group.tests,{...userTests.find(userTest=>userTest.id===userTestId)}]:[{...userTests.find(userTest=>userTest.id===userTestId)}]}:group)])
+    PostService.addTestToGroup(groupId,userTestId,userTests);
   }
+
   else{
         setGroups([...groups.map(group=>group.id===groupId?{...group,tests:[...group.tests.filter(userTest=>userTest.id!==userTestId)]}:group)])
-
+        PostService.RemoveTestFromGroup(groupId,userTestId);
   }
 }
 function checkGroup(groupId,userTestId){

@@ -38,6 +38,7 @@ function App(){
     onValue(ref(db), (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         if(childSnapshot.key==='groups'){
+          console.log('dsds')
           setGroups(childSnapshot.val())
         }
       });

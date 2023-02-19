@@ -30,10 +30,7 @@ useEffect(() => {
   fetchGroups();
 }, [])
 
-useEffect(() => {
-  if(groups!==undefined&&groups!==null)
-  PostService.setGroups(groups);
-}, [groups])
+
 
 
 
@@ -51,6 +48,7 @@ const searchedGroups=useMemo(() => {
 
 function joinGroup(id){
   setGroups([...groups.map(group=>group.id==id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group)])
+  PostService.joinGroup(id);
 }
 
 
