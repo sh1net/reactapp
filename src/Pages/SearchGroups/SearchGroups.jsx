@@ -64,8 +64,11 @@ function joinGroup(id){
       <input className="sg__titles__search" type="text" placeholder='Введите название группы' value={search} onChange={(e)=>setSearch(e.target.value)} />
 
         {groups.length===0
-        ?<h1>Группы не найдены</h1>
-        :<div className="search__groups__container">
+        ?<h1>Групп не существует</h1>
+        :searchedGroups.length===0
+        ?<h1>Такой группы не существует</h1>
+        :
+        <div className="search__groups__container">
           {searchedGroups.map(group=> <div key={group.id} className='search__groups__item'>
             <div className="sg__title" style={{marginBottom:"5px",fontWeight:"bold",fontFamily:"sans-serif"}}>{group.groupName}</div>
             <div className="sg__admin"><li>Админ: {group.admin}</li></div>

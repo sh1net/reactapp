@@ -2,10 +2,17 @@
 import { db } from "../firebase";
 import { storage } from "../firebase";
 import { uploadBytesResumable, getDownloadURL, ref as sRef } from "firebase/storage";
+import {get,set,ref,push,child,onValue} from "firebase/database"
 
-import {get,set,ref,push,child} from "firebase/database"
+
+
+
+ 
+
+
 
 export default class PostService{
+  
     static async getUsers(){
       const data=await get(child(ref(db),'/users')).then(snapshot=>{
 
@@ -92,6 +99,16 @@ static async setGroups(groups){
  set(ref(db,'/groups'),groups)
 }
 
+static async removeGroup(id){
+  const groups=await PostService.getGroups();
+  set(ref(db,'/groups'),groups.filter(group=>group.id!==id))
+ }
+
+ static async setGroup(group){
+  const groups=await PostService.getGroups();
+
+  set(ref(db,'groups/'+(groups.length)),group)
+ }
 
 
 

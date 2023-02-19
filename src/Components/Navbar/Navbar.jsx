@@ -1,14 +1,17 @@
 import React from 'react'
 import '../Navbar/NavbarStyles.css'
 import { useContext } from 'react';
-import { authContext } from '../../Context/useContext';
+import { authContext, groupsContext } from '../../Context/useContext';
 import exitIcon from '../../img/exitIcon.png'
 import { useEffect } from 'react';
 import { NavLink,Link } from 'react-router-dom';
 import PostService from '../../Api/PostService';
 import { useFetching } from '../../hooks/useFething';
+
+
 function Navbar() {
   const {setIsAuth,user,setUser,users}=useContext(authContext);
+  const {groups,setGroups}=useContext(groupsContext)
   const [fetchUserById]=useFetching(async(id)=>{
     const fetchedUserById=await PostService.getUserById(id);
     setUser(fetchedUserById);
@@ -21,6 +24,10 @@ function Navbar() {
     }
   }, [])
   
+  
+
+
+
     
  function exit(){
     setIsAuth(false);

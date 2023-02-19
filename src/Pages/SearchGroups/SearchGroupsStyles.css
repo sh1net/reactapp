@@ -26,12 +26,13 @@
 }
 
 .sg__titles__search{
-    border: 2px solid #EBA600;
+    border: 2px solid rgb(12, 138, 138);
+    height: 30px;
     background-color: #fff;
     border-radius: 5px;
     margin-bottom:20px;
     box-shadow: inset 1px 1px 5px -1px rgba(0, 0, 0, 0.6);
-    font-size:17px;
+    font-size:20px;
 }
 
 .sg__neter__btn{

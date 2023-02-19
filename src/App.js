@@ -9,6 +9,9 @@ import Loader from "./Components/Loader/Loader";
 import { useFetching } from "./hooks/useFething";
 import { testContext } from "./Context/useContext";
 import { groupsContext } from "./Context/useContext";
+import { onValue, ref } from "firebase/database";
+import { db } from "./firebase";
+
 import './main.css';
 function App(){
   const [isAuth, setIsAuth] = useState(false);
@@ -21,14 +24,6 @@ function App(){
     setUsers(fetchedUsers);
   })
 
-  const [fetchGroups]=useFetching(async()=>{
-    setTimeout(async function f() {
-      const fetchedGroups= await PostService.getGroups();
-      setGroups(fetchedGroups);
-      setTimeout(f,15000)
-    }, 100);
-   })
-
   const [user, setUser] = useState({
     login:'',
     password:'',
@@ -37,12 +32,21 @@ function App(){
     groups:[]
   })
 
- 
+
 
   useEffect(() => {
+    onValue(ref(db), (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        if(childSnapshot.key==='groups'){
+          setGroups(childSnapshot.val())
+        }
+      });
+    }, {
+      onlyOnce: false
+    }); 
     fetchUsers();
-    fetchGroups();
   }, [])
+
 
 
   useEffect(() => {
