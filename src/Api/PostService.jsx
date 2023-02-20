@@ -1,4 +1,3 @@
-
 import { db } from "../firebase";
 import { storage } from "../firebase";
 import { uploadBytesResumable, getDownloadURL, ref as sRef } from "firebase/storage";
@@ -33,6 +32,12 @@ export default class PostService{
     
     static  setUsers(users){
         set(ref(db,'/users'),users)
+    }
+
+    static async editUser(newUser){
+      const users=await PostService.getUsers()
+      console.log(newUser);
+      set(ref(db,'/users'),users.map((user)=>user.login==newUser.login?newUser:user))
     }
 
     static async getUserById(id){
@@ -103,32 +108,13 @@ static async removeGroup(id){
   const groups=await PostService.getGroups();
   set(ref(db,'/groups'),groups.filter(group=>group.id!==id))
  }
- static async joinGroup(id){
-  const groups=await PostService.getGroups();
-  set(ref(db,'/groups'),groups.map(group=>group.id===id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group))
- }
+
  static async setGroup(group){
   const groups=await PostService.getGroups();
 
   set(ref(db,'groups/'+(groups.length)),group)
  }
 
- static async RemoveTestFromGroup(groupId,userTestId){
-  const groups=await PostService.getGroups();
-  set(ref(db,'groups/'),groups.map(group=>group.id===groupId?{...group,tests:[...group.tests.filter(userTest=>userTest.id!==userTestId)]}:group))
- }
-
-
- static async addTestToGroup(groupId,userTestId,userTests){
-  const groups=await PostService.getGroups();
-  set(ref(db,'groups/'),groups.map(group=>group.id===groupId?{...group,tests:group.tests?[...group.tests,{...userTests.find(userTest=>userTest.id===userTestId)}]:[{...userTests.find(userTest=>userTest.id===userTestId)}]}:group))
- }
-
-
- static async leaveFromGroup(id){
-  const groups=await PostService.getGroups();
-  set(ref(db,'groups/'),groups.map(group=>group.id===id?{...group,members:group.members.filter(member=>member!==localStorage.getItem('userLogin'))}:group))
- }
 
 
 static  async uploadTestImg(file){
@@ -143,5 +129,32 @@ static  async getTestImg(file,setQuestions,questions,id){
     setQuestions([...questions.map((question)=>question.id==id?{...question,pic:url}:question)])
   })
  
+  }
+
+  static async uploadUserImg(file){
+    const userImgRef =sRef(storage,'userImages/'+file.name);
+    const uploadTask=uploadBytesResumable(userImgRef,file);
+    uploadTask.on('state_changed',(p)=>{}); 
+  }
+
+  static  async getUserImg(file,setUser,user){
+    const userImgRef=sRef(storage,'userImages/'+file.name);
+    getDownloadURL(userImgRef).then(url=>{
+      setUser({...user,pic:url});
+      PostService.editUser({...user,pic:url});
+    })
+  }
+
+  static async uploadGroupImg(file){
+    const groupsImgRef =sRef(storage,'groupsImages/'+file.name);
+    const uploadTask=uploadBytesResumable(groupsImgRef,file);
+    uploadTask.on('state_changed',(p)=>{}); 
+  }
+
+  static  async getGroupImg(file,setAddingGroups,addingGroups,id){
+    const groupsImgRef=sRef(storage,'groupsImages/'+file.name);
+    getDownloadURL(groupsImgRef).then(url=>{
+    setAddingGroups([...addingGroups.map((group=>group.id===id?{...group,groupImg:url}:group))])
+    })
   }
 }

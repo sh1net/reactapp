@@ -38,7 +38,7 @@ function Login() {
     password: "",
     email:"",
     id:0,
-    groupMember:''
+    pic:''
   }
     )
 })

@@ -61,7 +61,7 @@ function removeTest(id,title){
 }
 
 function editUserTest(id){
-  setUserTests([...userTests.map(userTest=>userTest.id=id?{...userTest,editMode:true,author:''}:userTest)])
+  setUserTests([...userTests.map(userTest=>userTest.id===id?{...userTest,editMode:true,author:''}:userTest)])
   navigate('/testCreater');
 }
 
@@ -88,7 +88,6 @@ function checkGroup(groupId,userTestId){
       return true;
     }
     else return false
-
   }
 }
   return (isLoading
