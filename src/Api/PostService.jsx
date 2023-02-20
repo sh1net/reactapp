@@ -35,6 +35,12 @@ export default class PostService{
         set(ref(db,'/users'),users)
     }
 
+    static async editUser(newUser){
+      const users=await PostService.getUsers()
+      console.log(newUser);
+      set(ref(db,'/users'),users.map((user)=>user.login==newUser.login?newUser:user))
+    }
+
     static async getUserById(id){
       const data=await  get(child(ref(db),'/users/'+id)).then(snapshot=>{
 
@@ -124,5 +130,19 @@ static  async getTestImg(file,setQuestions,questions,id){
     setQuestions([...questions.map((question)=>question.id==id?{...question,pic:url}:question)])
   })
  
+  }
+
+  static async uploadUserImg(file,user){
+    const userImgRef =sRef(storage,'userImages/'+file.name);
+    const uploadTask=uploadBytesResumable(userImgRef,file);
+    uploadTask.on('state_changed',(p)=>{}); 
+  }
+
+  static  async getUserImg(file,setUser,user){
+    const userImgRef=sRef(storage,'userImages/'+file.name);
+    getDownloadURL(userImgRef).then(url=>{
+      setUser({...user,pic:url});
+      PostService.editUser({...user,pic:url});
+    })
   }
 }

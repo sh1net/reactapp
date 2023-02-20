@@ -25,7 +25,7 @@ function Navbar() {
   }, [])
   
   
-
+console.log(user);
 
 
     
@@ -58,7 +58,7 @@ function Navbar() {
     <div className="navbar__right">
       <NavLink to ='/myProfile' className="nav__user__profile">
           <div className='nav__user'>{user.login}</div>
-          <div className='user__icon'></div>
+          <img src={user.pic} alt="" className='user__icon'/>
       </NavLink>
    <img src={exitIcon} alt="" className="exit__icon" onClick={exit} />
    </div>

@@ -42,7 +42,12 @@
     box-shadow: 0px 0px 10px black;
     border-radius: 50%;
 }
-.user__photo__select{
+
+.file__upload__input{
+    visibility:hidden;
+}
+
+.file__upload__button{
     align-self: flex-start;
     margin-top:20px;
     margin-left:35px;

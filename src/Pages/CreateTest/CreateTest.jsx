@@ -327,7 +327,9 @@ duration.setMinutes(+testDurationTime.minute);
 console.log(questions);
 setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime(),durationTime:duration.getTime(),questions:questions,author:localStorage.getItem('userLogin')});
 }
-
+function UserImgSelect(){
+  document.getElementById("file__input").click();
+}
   return (
     <div>
         <Header/>
@@ -411,11 +413,12 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                             <option value={3}>3 балла</option>
                         </select>
                         {!question.pic
-                        ?<p>Вы можете установить картинку к тесту</p>
+                        ?<p style={{marginTop:"10px"}}>Вы можете установить картинку к тесту</p>
                         :""
                         }
-                        <input className="file__upload__button" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
+                        <input id="file__input" className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
                         <img src={question.pic} alt="" className='ct__quastion__pic'/>
+                        <button className="file__upload__buton" onClick={()=>UserImgSelect()}>Выбрать картинку</button>
                         <p className="ct__text__input__question">Введите текст вопроса</p>
                         <textarea name="postContent" className="ct__input__question" type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}}/>
                        

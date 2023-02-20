@@ -61,7 +61,7 @@ function removeTest(id,title){
 }
 
 function editUserTest(id){
-  setUserTests([...userTests.map(userTest=>userTest.id=id?{...userTest,editMode:true,author:''}:userTest)])
+  setUserTests([...userTests.map(userTest=>userTest.id===id?{...userTest,editMode:true,author:''}:userTest)])
   navigate('/testCreater');
 }
 

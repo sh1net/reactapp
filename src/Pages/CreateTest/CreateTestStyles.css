@@ -59,14 +59,23 @@ font-size: 20px;
 
 .ct__creater__container{
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 600px;;
     border-radius: 10px;
     padding: 10px;
     width: 100%;
     background-color: rgb(170, 170, 170);
 }
 
-
+.file__upload__buton{
+    align-self:center;
+    width:fit-content;
+    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:20px;
+    border: 2px solid #EBA600;
+    border-radius: 10px;
+    background-color: #EBA600;
+}
 
 .ct_quastions_container{
 margin: 10px 0;
@@ -227,4 +236,5 @@ margin: 5px 0;
     border-radius:10px;
     font-size:20px;
     box-shadow: 0px 2px 10px black;
+    position:static;
 }

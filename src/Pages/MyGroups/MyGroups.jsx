@@ -9,11 +9,11 @@ import Loader from '../../Components/Loader/Loader'
 import PostService from '../../Api/PostService'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { useState } from 'react'
 
 function MyGroups() {
     const {groups, setGroups}=useContext(groupsContext)
-
+    const [addingGroups, setAddingGroups] = useState([])
     const [fetchGroups,isLoading]=useFetching(async()=>{
         const fetchedGroups= await PostService.getGroups();
          setGroups(fetchedGroups);
@@ -30,25 +30,30 @@ useEffect(() => {
   }, [])
 
 
-
+console.log(addingGroups)
 function leaveGroup(groupID){
 setGroups([...groups.map(group=>group.id===groupID?{...group,members:group.members.filter(member=>member!==localStorage.getItem('userLogin'))}:group)])
+PostService.leaveFromGroup(groupID);
 }
 
 
   function addGroup(){
-    setGroups([{admin:localStorage.getItem('userLogin'),id:Date.now(),groupName:'',members:[''],createMode:true},...groups])
+    setAddingGroups([{admin:localStorage.getItem('userLogin'),id:Date.now(),groupName:'',members:[''],groupImg:''},...addingGroups])
   }
 
   function inputGroupName(name,id){
-    setGroups([...groups.map(group=>group.id===id?{...group,groupName:name}:group)])
+    setAddingGroups([...addingGroups.map(group=>group.id===id?{...group,groupName:name}:group)])
   }
 
   function createGroup(id,group){
     
-    setGroups([...groups.map(group=>group.id===id?{...group,createMode:false}:group)])
-    PostService.setGroup({...group,createMode:false});
+    setGroups([...groups,group])
+    setAddingGroups(addingGroups.filter(group=>group.id!==id))
+    PostService.setGroup(group);
   }
+  function cancelGroup(id){
+    setAddingGroups(addingGroups.filter(group=>group.id!==id))
+}
 function removeGroup(id){
     setGroups(groups.filter(group=>group.id!==id))
     PostService.removeGroup(id)
@@ -64,29 +69,45 @@ function removeGroup(id){
                 <div className="side__groups">
                 <button className="mg__add__group__button" onClick={()=>addGroup()}>Добавить новую группу</button>
                 <p className="mg__another__titles">Курирование</p>
-                {groups.map((group)=>group.admin===localStorage.getItem('userLogin')?
+                {addingGroups.map((group)=>
                  <div key={group.id} className='side__groups__item__admin'>
-                    {group.createMode
-                    ?<div>
+                    
+                    <div>
+
                         <p style={{fontWeight:"bold"}}>Название:</p>
                         <input className="mg__input__name" placeholder="Введите текст" type="text" value={group.groupName} onChange={(e)=>{inputGroupName(e.target.value,group.id)}}/>
-                        <button className="mg__create__cansel__buttons" onClick={()=>removeGroup(group.id,group)}>Отменить</button>
+                        <button className="mg__create__cansel__buttons" onClick={()=>cancelGroup(group.id)}>Отменить</button>
                         <button className="mg__create__cansel__buttons" onClick={()=>{createGroup(group.id,group)}}>Создать</button>
-
+                        <p>Установить картинку</p>
                     </div>
-                    : <div>
-                        <div className="group__title">{group.groupName}</div>
+                     
+                    
+                 </div>
+                  
+                  )
+                }
+                {groups.map((group)=>group.admin===localStorage.getItem('userLogin')?
+                 <div key={group.id} className='side__groups__item__admin'>
+                     <div>
+                        <div className="group__title">{group.groupName} 
+                        {group.groupImg!==''
+                        ?<img className='img__container' src={group.groupImg} alt="" />
+
+                        :''
+
+                        }
+                        </div>
                         <div>{group.members.length>1
                         ?<div className='group__members__container'>
                             {group.members.map(member=> <div key={member} className='member'>{member}</div>
                                 )}
                         </div>
-                        : <div></div>
+                        : ''
                             }
                             </div>
                         <button className="mg__delete__button" onClick={()=>removeGroup(group.id)}>Удалить группу</button>
                     </div>
-                    }
+                    
                  </div>:
                   ''
                   )
@@ -98,7 +119,14 @@ function removeGroup(id){
                 {groups.map((group)=>group.members!==undefined?
                     group.members.map((member)=>member===localStorage.getItem('userLogin')? <div key={group.id} className='side__groups__item__member'>
                     
-                      <div className="group__title">{group.groupName}</div>
+                      <div className="group__title">{group.groupName}
+                      {group.groupImg!==''
+                        ?<img className='img__container' src={group.groupImg} alt="" />
+
+                        :''
+
+                        }
+                      </div>
                       <div className="group__admin">Админ: {group.admin}</div>
 
                       Участники:{group.members.length>1
