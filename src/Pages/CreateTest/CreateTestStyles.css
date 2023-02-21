@@ -58,8 +58,8 @@ font-size: 20px;
 }
 
 .ct__creater__container{
-    overflow-y: scroll;
-    max-height: 600px;;
+    overflow-y: auto;
+    max-height: 600px;
     border-radius: 10px;
     padding: 10px;
     width: 100%;

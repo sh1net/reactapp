@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
 import { useState } from 'react'
+import TestPassing from '../TestPassing/TestPassing'
 
 
 function PassTest() {
@@ -46,8 +47,12 @@ useEffect(() => {
 
   const navigate=useNavigate();
   
-  function dateDiff(open,now=new Date()){
-    return open-now;
+  function  dateDiff(open,now=new Date()){
+    
+    
+      return open-now;
+  
+    
   }
 
   function dateHours(hours){
@@ -89,7 +94,7 @@ useEffect(() => {
                 .
                 {new Date(userTest.openTime).getFullYear()}
               </div>
-              <button className='pass__test__button' disabled={dateDiff(new Date(userTest.openTime))<=0
+              <button className='pass__test__button' onClick={()=>navigate('/TestPassing')} disabled={dateDiff(new Date(userTest.openTime))<=0
                 &&dateDiff(new Date(userTest.closeTime))>=0?false:true}>Пройти</button>
               <div>
                 {dateDiff(new Date(userTest.closeTime))<=0

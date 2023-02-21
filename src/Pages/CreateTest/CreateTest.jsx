@@ -351,6 +351,10 @@ function UserImgSelect(){
                     hours={hours}/>
                     </div>
                 </div>
+               {parseInt(testOpenTime.hour)< new Date().getHours()||(parseInt(testOpenTime.hour)< new Date().getHours()||parseInt(testOpenTime.minute)< new Date().getMinutes())
+               ?<div style={{margin:'-70px 0'}}>Тест будет перенесен на завтра</div>
+                : ''
+               }
                 <div className="ct__selectors__item">
                     <div className="ct__item__text">
                         Время закрытия теста
