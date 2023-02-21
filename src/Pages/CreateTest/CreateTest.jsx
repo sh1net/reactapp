@@ -365,7 +365,6 @@ setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime()
                     onChangeHour={(e)=>{setTestCloseTime({...testCloseTime,hour:e.target.value})}} 
                     minutes={minutes} 
                     hours={hours}
-
                     />
                     </div>
                 </div>
