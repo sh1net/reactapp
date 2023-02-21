@@ -55,6 +55,7 @@ function removeTest(id,title){
   const userId=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id;
   setUserTests(userTests.filter((userTest)=>userTest.id!=id))
   setGroups(groups.map(group=>group.tests!==undefined?{...group,tests:group.tests.filter(userTest=>userTest.id!==id)}:group))
+  PostService.deleteTestFromGroup(id)
   PostService.setUserTests(userTests.filter((userTest)=>userTest.id!==id),userId)
    }
   })

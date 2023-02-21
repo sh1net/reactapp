@@ -327,8 +327,8 @@ duration.setMinutes(+testDurationTime.minute);
 console.log(questions);
 setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime(),durationTime:duration.getTime(),questions:questions,author:localStorage.getItem('userLogin')});
 }
-function UserImgSelect(){
-  document.getElementById("file__input").click();
+function testImgSelect(id){
+  document.getElementById(id).click();
 }
   return (
     <div>
@@ -367,7 +367,6 @@ function UserImgSelect(){
                     onChangeHour={(e)=>{setTestCloseTime({...testCloseTime,hour:e.target.value})}} 
                     minutes={minutes} 
                     hours={hours}
-
                     />
                     </div>
                 </div>
@@ -420,9 +419,9 @@ function UserImgSelect(){
                         ?<p style={{marginTop:"10px"}}>Вы можете установить картинку к тесту</p>
                         :""
                         }
-                        <input id="file__input" className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
+                        <input id={question.id} className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,question.id)}}/>
                         <img src={question.pic} alt="" className='ct__quastion__pic'/>
-                        <button className="file__upload__buton" onClick={()=>UserImgSelect()}>Выбрать картинку</button>
+                        <button className="file__upload__buton" onClick={()=>testImgSelect(question.id)}>Выбрать картинку</button>
                         <p className="ct__text__input__question">Введите текст вопроса</p>
                         <textarea name="postContent" className="ct__input__question" type="text" value={question.qText} onChange={(e)=>{inputQtext(iQ,e)}}/>
                        

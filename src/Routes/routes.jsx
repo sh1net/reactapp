@@ -23,8 +23,8 @@ export const privateRoutes=[
     {path:"/passTests",element:<PassTest/>,exact:true},
     {path:"/myProfile",element:<UserProfile/>,exact:true},
     {path:"/myGroups",element:<MyGroups/>,exact:true},
-    {path:"/searchGroups",element:<SearchGroups/>,exact:true},
-    {path:"/TestPassing", element:<TestPassing/>,exact:true}
+    {path:"/searchGroups",element:<SearchGroups/>,exact:true}
+   
 
 ]
 
