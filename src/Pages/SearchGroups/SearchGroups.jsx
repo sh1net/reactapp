@@ -70,7 +70,7 @@ function joinGroup(id){
           {searchedGroups.map(group=> <div key={group.id} className='search__groups__item'>
             <div className="sg__title" style={{marginBottom:"5px",fontWeight:"bold",fontFamily:"sans-serif"}}>{group.groupName}
             {group.groupImg!==''
-                        ?<img className='img__container' src={group.groupImg} alt="" />
+                        ?<img className='sg__img__container' src={group.groupImg} alt="" />
 
                         :''
 
