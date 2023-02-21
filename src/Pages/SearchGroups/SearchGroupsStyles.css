@@ -9,21 +9,24 @@
 }
 
 .search__groups__container{
-    display: grid;
-    grid-auto-rows: minmax(50px,auto);
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    display: flex;
+    max-width:100%;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    max-height:77vh;
+
 }
 
 .search__groups__item{
-    width: 60%;
+    width: 12%;
+    height:150px;
     background-color:antiquewhite;
-    margin:10px 0;
+    margin:50px 20px;
     border:3.5px solid #EBA600;
     padding:15px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px black;
-    min-height: 60px;
+    min-height: 80px;
 }
 
 .sg__titles__search{
@@ -42,6 +45,14 @@
     border:2px solid #EBA600;
     box-shadow: 0px 0px 5px black;
     display: block;
+    margin-top: 95px;;
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 5px;
+}
+
+.sg__img__container{
+    border-radius: 50px;
+    height:60px;
+    width:60px;
+    float:right;
 }

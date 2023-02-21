@@ -25,7 +25,7 @@ function Navbar() {
   }, [])
   
   
-
+console.log(user);
 
 
     

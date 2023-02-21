@@ -12,6 +12,7 @@ import CreateTest from "../Pages/CreateTest/CreateTest";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import MyGroups from "../Pages/MyGroups/MyGroups";
 import SearchGroups from "../Pages/SearchGroups/SearchGroups";
+import TestPassing from "../Pages/TestPassing/TestPassing";
 export const privateRoutes=[
 
     {path:"/main",element:<Main/>,exact:true},
@@ -23,6 +24,7 @@ export const privateRoutes=[
     {path:"/myProfile",element:<UserProfile/>,exact:true},
     {path:"/myGroups",element:<MyGroups/>,exact:true},
     {path:"/searchGroups",element:<SearchGroups/>,exact:true}
+   
 
 ]
 

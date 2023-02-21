@@ -1,0 +1,45 @@
+.bodyy{
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+
+.test__passing__bg{
+    margin: 0 auto;
+    display: flex;
+    padding:20px;
+    flex-direction: column;
+    background-color: rgb(216, 216, 216);
+    justify-content: center;
+    width: 95%;
+    overflow-y: auto;
+}
+
+.test__passing__container{
+    margin: 0 auto;
+    display: flex;
+    padding:20px;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    border-radius: 30px;
+    width: 95%;
+    height: 100%;
+}
+
+.timer{
+    width: 90px;
+    height: 30px;
+    position: fixed;
+    top: 50%;
+    left:0;
+    margin-right:5px;
+    z-index: 1000;
+    box-shadow: 0px 0px 5px black;
+    background-color: beige;
+}
+
+.passing__question__img{
+  width: 300px;
+  height: 300px;
+}

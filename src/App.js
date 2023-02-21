@@ -18,7 +18,7 @@ function App(){
   const [users, setUsers] = useState(null);
   const [userTests, setUserTests] = useState(null)
   const [groups,setGroups]=useState(null)
-  
+  const [isPassing, setIsPassing] = useState(false)
   const [fetchUsers,isLoading]=useFetching(async()=>{
    const fetchedUsers= await PostService.getUsers();
     setUsers(fetchedUsers);
@@ -47,7 +47,11 @@ function App(){
     fetchUsers();
   }, [])
 
-
+  useEffect(() => {
+    if(localStorage.getItem('passing')){
+      setIsPassing(true);
+    }
+  }, [])
 
   useEffect(() => {
     if(localStorage.getItem('auth')){
@@ -61,7 +65,7 @@ function App(){
   :
     <authContext.Provider value={{isAuth,setIsAuth,users,setUsers,user,setUser}}>
       <groupsContext.Provider value={{groups,setGroups}}>
-        <testContext.Provider value={{userTests,setUserTests}}>
+        <testContext.Provider value={{userTests,setUserTests,isPassing,setIsPassing}}>
         <BrowserRouter >
         <AppRouter/>
         </BrowserRouter>

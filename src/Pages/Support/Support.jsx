@@ -14,7 +14,7 @@ function Support() {
       </div>
     <div className='support__container'>
         <div className='support__item'>
-        <img className='item__img' style={{border: '1px solid #89E0FF',boxShadow: '0 0 30px #89E0FF'}} src={shinet} alt="" />
+        <img className='item__img' style={{border: '1px solid rgb(69, 114, 236)',boxShadow: '0 0 30px rgb(69, 114, 236)'}} src={shinet} alt="" />
         <div className='item__text'>shinet</div>
         <div className='media__ref'>
         <img className='media__icon' src={telega} alt="" />

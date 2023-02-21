@@ -6,6 +6,7 @@ import { privateRoutes } from '../Routes/routes'
 import { useContext } from 'react'
 import { testContext } from '../Context/useContext'
 import { useState } from 'react'
+import TestPassing from '../Pages/TestPassing/TestPassing'
 function AppRouter() {
     const{isAuth}= useContext(authContext)
  
@@ -20,10 +21,11 @@ function AppRouter() {
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
+        <Route exact  path="/testPassing/:groupName/:testID" element={<TestPassing/>}/>
         <Route exact path="/" element={ <Navigate replace to={"/main"}/>}/>
         <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
         <Route element={ <Navigate replace to={"/main"}/>} />
-       
+        
 
         </Routes>
         

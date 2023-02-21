@@ -31,7 +31,7 @@ useEffect(() => {
   }, [])
 
 
-
+console.log(addingGroups)
 function leaveGroup(groupID){
 setGroups([...groups.map(group=>group.id===groupID?{...group,members:group.members.filter(member=>member!==localStorage.getItem('userLogin'))}:group)])
 PostService.leaveFromGroup(groupID);

@@ -150,6 +150,14 @@ static  async getTestImg(file,setQuestions,questions,id){
     })
   }
 
+  static async deleteTestFromGroup(id){
+    const groups=await PostService.getGroups();
+    set(ref(db,'/groups'),groups.map(group=>group.tests!==undefined?{...group,tests:group.tests.filter(userTest=>userTest.id!==id)}:group));
+
+  }
+  
+
+
   static async uploadGroupImg(file){
     const groupsImgRef =sRef(storage,'groupsImages/'+file.name);
     const uploadTask=uploadBytesResumable(groupsImgRef,file);

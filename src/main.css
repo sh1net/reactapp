@@ -1,5 +1,7 @@
 body{
     margin: 0px;
     padding: 10px;
-    min-width: 100vh;
+    min-width: 155vh;
+    height: 100%;
+    overflow-y: hidden;
 }
