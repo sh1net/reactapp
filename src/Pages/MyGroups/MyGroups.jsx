@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import AddingGroups from '../../Components/AddingGroups/AddingGroups'
+import swal from 'sweetalert'
 function MyGroups() {
     const {groups, setGroups}=useContext(groupsContext)
     const [addingGroups, setAddingGroups] = useState([])
@@ -54,7 +55,7 @@ function removeGroup(id){
             <div className="groups__container">
                 <div className="side__groups">
                 <AddingGroups groups={groups} setGroups={setGroups}/>
-                {groups.map((group)=>group.admin===localStorage.getItem('userLogin')?
+                {groups.reverse().map((group)=>group.admin===localStorage.getItem('userLogin')?
                  <div key={group.id} className='side__groups__item__admin'>
                      <div>
                         <div className="group__title">{group.groupName} 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import PostService from '../../Api/PostService'
-
+import swal from 'sweetalert'
 
 function AddingGroups({groups,setGroups}) {
     const [addingGroups, setAddingGroups] = useState([])
@@ -13,9 +13,31 @@ function AddingGroups({groups,setGroups}) {
       function inputGroupName(name,id){
         setAddingGroups([...addingGroups.map(group=>group.id===id?{...group,groupName:name}:group)])
       }
-    
+
+      function checkGroupName(name){
+        if(groups.find(group=>group.groupName.toLowerCase()===name.toLowerCase())){
+          swal({
+            icon:"error",
+            title:"Ошибка",
+            text:"Группа с таким названием уже существует"
+          })
+          return true;
+        }
+      else if(name===''){
+          swal({
+            icon:"error",
+            title:"Ошибка",
+            text:"Вы не ввели название группы"
+          })
+          return true
+        }
+      else return false
+        }
+
       function createGroup(id,group){
-        
+        if(checkGroupName(group.groupName)){
+          return
+        }
         setGroups([...groups,group])
         setAddingGroups(addingGroups.filter(group=>group.id!==id))
         PostService.setGroup(group);
@@ -50,8 +72,8 @@ function AddingGroups({groups,setGroups}) {
                         
                         <button className="mg__create__cansel__buttons" onClick={()=>cancelGroup(group.id)}>Отменить</button>
                         <button className="mg__create__cansel__buttons" onClick={()=>{createGroup(group.id,group)}}>Создать</button>
-                        <p>Установить аватар группы</p>
-                        <button onClick={()=>groupImgSelect()} className="file__upload__button">Выбрать аватар</button>
+                        
+                        <button onClick={()=>groupImgSelect()} className="file__upload__button">Выбрать аватар </button>
                         <input id="group__file" className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,group.id)}}/>
                     </div>
                      

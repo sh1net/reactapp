@@ -46,8 +46,12 @@ useEffect(() => {
 
   const navigate=useNavigate();
   
-  function dateDiff(open,now=new Date()){
-    return open-now;
+  function  dateDiff(open,now=new Date()){
+    
+    
+      return open-now;
+  
+    
   }
 
   function dateHours(hours){
