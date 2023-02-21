@@ -157,4 +157,9 @@ static  async getTestImg(file,setQuestions,questions,id){
     setAddingGroups([...addingGroups.map((group=>group.id===id?{...group,groupImg:url}:group))])
     })
   }
+
+  static async joinGroup(id){
+    const groups=await PostService.getGroups();
+    set(ref(db,'/groups'),groups.map(group=>group.id===id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group))
+   }
 }
