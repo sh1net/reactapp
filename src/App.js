@@ -29,7 +29,7 @@ function App(){
     password:'',
     email:'',
     id:0,
-    pic:'',
+    pic:''
   })
 
 

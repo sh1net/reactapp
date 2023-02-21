@@ -30,10 +30,7 @@ useEffect(() => {
   fetchGroups();
 }, [])
 
-useEffect(() => {
-  if(groups!==undefined&&groups!==null)
-  PostService.setGroups(groups);
-}, [groups])
+
 
 
 
@@ -51,6 +48,7 @@ const searchedGroups=useMemo(() => {
 
 function joinGroup(id){
   setGroups([...groups.map(group=>group.id==id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group)])
+  PostService.joinGroup(id);
 }
 
 
@@ -70,13 +68,20 @@ function joinGroup(id){
         :
         <div className="search__groups__container">
           {searchedGroups.map(group=> <div key={group.id} className='search__groups__item'>
-            <div className="sg__title" style={{marginBottom:"5px",fontWeight:"bold",fontFamily:"sans-serif"}}>{group.groupName}</div>
+            <div className="sg__title" style={{marginBottom:"5px",fontWeight:"bold",fontFamily:"sans-serif"}}>{group.groupName}
+            {group.groupImg!==''
+                        ?<img className='img__container' src={group.groupImg} alt="" />
+
+                        :''
+
+                        }
+            </div>
             <div className="sg__admin"><li>Админ: {group.admin}</li></div>
             <p ><li>Участников: {group.members.length-1}</li></p>
             {group.members.find(member=>member===localStorage.getItem('userLogin'))&&group.admin!==localStorage.getItem('userLogin')
-              ? <p style={{textAlign:"right",fontFamily:"sans-serif"}}>Вы вступили</p>
+              ? <p style={{fontFamily:"sans-serif",marginTop:'5px'}}>Вы вступили</p>
               :group.admin===localStorage.getItem('userLogin')
-              ? <p style={{textAlign:"right",fontFamily:"sans-serif"}}>Вы админ этой группы</p>
+              ? <p style={{fontFamily:"sans-serif",marginTop:'5px'}}>Вы админ этой группы</p>
               : <button className="sg__neter__btn" onClick={()=>joinGroup(group.id)}>Вступить</button>
             }
           </div>

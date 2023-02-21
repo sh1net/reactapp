@@ -10,7 +10,7 @@ import PostService from '../../Api/PostService'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-
+import AddingGroups from '../../Components/AddingGroups/AddingGroups'
 function MyGroups() {
     const {groups, setGroups}=useContext(groupsContext)
     const [addingGroups, setAddingGroups] = useState([])
@@ -37,23 +37,9 @@ PostService.leaveFromGroup(groupID);
 }
 
 
-  function addGroup(){
-    setAddingGroups([{admin:localStorage.getItem('userLogin'),id:Date.now(),groupName:'',members:[''],groupImg:''},...addingGroups])
-  }
 
-  function inputGroupName(name,id){
-    setAddingGroups([...addingGroups.map(group=>group.id===id?{...group,groupName:name}:group)])
-  }
 
-  function createGroup(id,group){
-    
-    setGroups([...groups,group])
-    setAddingGroups(addingGroups.filter(group=>group.id!==id))
-    PostService.setGroup(group);
-  }
-  function cancelGroup(id){
-    setAddingGroups(addingGroups.filter(group=>group.id!==id))
-}
+
 function removeGroup(id){
     setGroups(groups.filter(group=>group.id!==id))
     PostService.removeGroup(id)
@@ -67,25 +53,7 @@ function removeGroup(id){
         <div className="my__groups__bg">
             <div className="groups__container">
                 <div className="side__groups">
-                <button className="mg__add__group__button" onClick={()=>addGroup()}>Добавить новую группу</button>
-                <p className="mg__another__titles">Курирование</p>
-                {addingGroups.map((group)=>
-                 <div key={group.id} className='side__groups__item__admin'>
-                    
-                    <div>
-
-                        <p style={{fontWeight:"bold"}}>Название:</p>
-                        <input className="mg__input__name" placeholder="Введите текст" type="text" value={group.groupName} onChange={(e)=>{inputGroupName(e.target.value,group.id)}}/>
-                        <button className="mg__create__cansel__buttons" onClick={()=>cancelGroup(group.id)}>Отменить</button>
-                        <button className="mg__create__cansel__buttons" onClick={()=>{createGroup(group.id,group)}}>Создать</button>
-                        <p>Установить картинку</p>
-                    </div>
-                     
-                    
-                 </div>
-                  
-                  )
-                }
+                <AddingGroups groups={groups} setGroups={setGroups}/>
                 {groups.map((group)=>group.admin===localStorage.getItem('userLogin')?
                  <div key={group.id} className='side__groups__item__admin'>
                      <div>

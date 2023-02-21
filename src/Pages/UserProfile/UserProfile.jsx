@@ -5,7 +5,6 @@ import './UserProfile.css'
 import { useContext } from 'react';
 import { authContext } from '../../Context/useContext';
 import PostService from '../../Api/PostService'
-import { useState } from 'react';
 
 
 

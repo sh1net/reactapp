@@ -11,7 +11,7 @@ import { useFetching } from '../../hooks/useFething';
 
 function Navbar() {
   const {setIsAuth,user,setUser,users}=useContext(authContext);
-  const {groups,setGroups}=useContext(groupsContext)
+ 
   const [fetchUserById]=useFetching(async(id)=>{
     const fetchedUserById=await PostService.getUserById(id);
     setUser(fetchedUserById);
@@ -58,7 +58,11 @@ console.log(user);
     <div className="navbar__right">
       <NavLink to ='/myProfile' className="nav__user__profile">
           <div className='nav__user'>{user.login}</div>
-          <img src={user.pic} alt="" className='user__icon'/>
+          {user.pic!==''
+          ?<img className='user__icon' src={user.pic}/>
+          : <div className="user__icon"></div>
+          }
+          
       </NavLink>
    <img src={exitIcon} alt="" className="exit__icon" onClick={exit} />
    </div>

@@ -1,4 +1,3 @@
-
 import { db } from "../firebase";
 import { storage } from "../firebase";
 import { uploadBytesResumable, getDownloadURL, ref as sRef } from "firebase/storage";
@@ -132,7 +131,7 @@ static  async getTestImg(file,setQuestions,questions,id){
  
   }
 
-  static async uploadUserImg(file,user){
+  static async uploadUserImg(file){
     const userImgRef =sRef(storage,'userImages/'+file.name);
     const uploadTask=uploadBytesResumable(userImgRef,file);
     uploadTask.on('state_changed',(p)=>{}); 
@@ -143,6 +142,19 @@ static  async getTestImg(file,setQuestions,questions,id){
     getDownloadURL(userImgRef).then(url=>{
       setUser({...user,pic:url});
       PostService.editUser({...user,pic:url});
+    })
+  }
+
+  static async uploadGroupImg(file){
+    const groupsImgRef =sRef(storage,'groupsImages/'+file.name);
+    const uploadTask=uploadBytesResumable(groupsImgRef,file);
+    uploadTask.on('state_changed',(p)=>{}); 
+  }
+
+  static  async getGroupImg(file,setAddingGroups,addingGroups,id){
+    const groupsImgRef=sRef(storage,'groupsImages/'+file.name);
+    getDownloadURL(groupsImgRef).then(url=>{
+    setAddingGroups([...addingGroups.map((group=>group.id===id?{...group,groupImg:url}:group))])
     })
   }
 }
