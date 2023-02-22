@@ -43,7 +43,7 @@ const navigate=useNavigate();
         hour:'00',minute:'00'
     })
     const [testDurationTime, setTestDurationTime] = useState({
-        hour:'00',minute:'00'
+      minute:'00',seconds:'00'
     })
 
     const [questions, setQuestions] = useState([
@@ -92,12 +92,12 @@ const navigate=useNavigate();
               ?"0"+new Date(userTest.closeTime).getMinutes()
               :new Date(userTest.closeTime).getMinutes()+""})
 
-              setTestDurationTime({hour:new Date(userTest.durationTime).getHours()<10
-                ?"0"+new Date(userTest.durationTime).getHours()
-                :new Date(userTest.durationTime).getHours()+"",
-                minute:new Date(userTest.durationTime).getMinutes()<10
+              setTestDurationTime({minute:new Date(userTest.durationTime).getMinutes()<10
                 ?"0"+new Date(userTest.durationTime).getMinutes()
-                :new Date(userTest.durationTime).getMinutes()+""})
+                :new Date(userTest.durationTime).getMinutes()+"",
+                seconds:new Date(userTest.durationTime).getSeconds()<10
+                ?"0"+new Date(userTest.durationTime).getSeconds()
+                :new Date(userTest.durationTime).getSeconds()+""})
     };})
     }
  
@@ -215,7 +215,7 @@ useEffect(() => {
 
     if((testCloseTime.hour<=testOpenTime.hour&&
       testCloseTime.minute<=testOpenTime.minute)||
-      (testDurationTime.hour=='00'&& testDurationTime.minute=='00')
+      (testDurationTime.minute=='00'&& testDurationTime.seconds=='00')
     ){
       swal({
         icon:"error",
@@ -322,9 +322,9 @@ open.setHours(+testOpenTime.hour);
 open.setMinutes(+testOpenTime.minute);
 close.setHours(+testCloseTime.hour);
 close.setMinutes(+testCloseTime.minute);
-duration.setHours(+testDurationTime.hour);
 duration.setMinutes(+testDurationTime.minute);
-console.log(questions);
+duration.setSeconds(+testDurationTime.seconds);
+
 setCurrentTest({...currentTest,openTime:open.getTime(),closeTime:close.getTime(),durationTime:duration.getTime(),questions:questions,author:localStorage.getItem('userLogin')});
 }
 function testImgSelect(id){
@@ -351,8 +351,10 @@ function testImgSelect(id){
                     hours={hours}/>
                     </div>
                 </div>
-               {parseInt(testOpenTime.hour)< new Date().getHours()||(parseInt(testOpenTime.hour)< new Date().getHours()||parseInt(testOpenTime.minute)< new Date().getMinutes())
-               ?<div style={{margin:'-70px 0'}}>Тест будет перенесен на завтра</div>
+               {parseInt(testOpenTime.hour)< new Date().getHours()
+               ||(parseInt(testOpenTime.hour)< new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
+               ||(parseInt(testOpenTime.hour)=== new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
+               ?swal
                 : ''
                }
                 <div className="ct__selectors__item">
@@ -376,12 +378,12 @@ function testImgSelect(id){
                     </div>
                     <div className="ct__item__selector">
                     <CreaterSelect 
-                    hour={testDurationTime.hour}
-                    minute={testDurationTime.minute}
-                    onChangeMinute={(e)=>{setTestDurationTime({...testDurationTime,minute:e.target.value})}} 
-                    onChangeHour={(e)=>{setTestDurationTime({...testDurationTime,hour:e.target.value})}} 
+                    hour={testDurationTime.minute}
+                    minute={testDurationTime.seconds}
+                    onChangeMinute={(e)=>{setTestDurationTime({...testDurationTime,seconds:e.target.value})}} 
+                    onChangeHour={(e)=>{setTestDurationTime({...testDurationTime,minute:e.target.value})}} 
                     minutes={minutes} 
-                    hours={hours}/>
+                    hours={minutes}/>
                     </div>
                     
                 </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Header from '../../Components/Header/Header'
 import Navbar from '../../Components/Navbar/Navbar'
 import { groupsContext } from '../../Context/useContext'
@@ -12,6 +12,7 @@ import Loader from '../../Components/Loader/Loader'
 import { useState } from 'react'
 import './TestPassing.css'
 import { useParams } from 'react-router-dom'
+
 
 function TestPassing(){
     const {groups,setGroups}=useContext(groupsContext)
@@ -28,23 +29,24 @@ function TestPassing(){
 
   const [timerTime, setTimerTime] = useState(null)
 
-  useEffect(() => {
-    if(timerTime!==null){
-    setTimeout(function run() {
-      if(timerTime.minutes-1<0){
-        setTimerTime({hours:timerTime.hours-1,minutes:59})
-      }
-      else{
-        setTimerTime({...timerTime,minutes:timerTime.minutes-1})
-      }
-        setTimeout(run, 10000);
-      }, 10000);
+ function getTime(){
+ 
+  if(timerTime!==null){
+    if(timerTime.minutes-1<0){
+      setTimerTime({hours:timerTime.hours-1,minutes:59})
+      localStorage.setItem('durationLast',JSON.stringify({hours:timerTime.hours-1,minutes:59}))
     }
-  }, [timerTime])
+    else{
+      setTimerTime({...timerTime,minutes:timerTime.minutes-1})
+      localStorage.setItem('durationLast',JSON.stringify({...timerTime,minutes:timerTime.minutes-1}))
+    }
+  }
+ }
   
 
 
   useEffect(() => {
+  
   fetchGroups();
   }, [])
 
@@ -52,12 +54,25 @@ function TestPassing(){
     if(groups!==undefined&&groups!==null){
         let test=groups.find(group=>group.groupName===params.groupName).tests.find(test=>test.id===params.testID)
       setPassingTest(test)
+      if(localStorage.getItem('durationLast')){
+        setTimerTime(JSON.parse(localStorage.getItem('durationLast')))
+      }
+      else
       setTimerTime({
         hours:new Date(test.durationTime).getHours(),
         minutes:new Date(test.durationTime).getMinutes()
     })
     }
     }, [groups])
+
+    useEffect(() => {
+      const interval=setInterval(()=>getTime(),1000)
+    
+      return () => {
+        clearInterval(interval);
+      }
+    }, [timerTime])
+    
    
 const params=useParams();
 
@@ -80,13 +95,14 @@ function chooseRightCaseSeveral(iQ,iA,e){
         ?<Loader/>
         :
         <div className='bodyy'>
-            <div className="timer">{timerTime.hours}:{timerTime.minutes}</div>
+            <div className="timer">{timerTime.hours<10?'0'+timerTime.hours:timerTime.hours}:{timerTime.minutes<10?'0'+timerTime.minutes:timerTime.minutes}</div>
             <div className="test__passing__bg">
             <div className="passing__test__title">{passingTest.title}</div>
                 <div className="test__passing__container">
                 {passingTest.questions.map((question,iQ)=> <div key={question.id} className="test__passing__question">
              
-                <p>{question.qText}</p>
+                <div>{question.qText}</div>
+                <div>Баллы за вопрос:{question.mark}</div>
                 {!question.pic
                 ?''
                 :<img className='passing__question__img' src={question.pic} alt=""/>
