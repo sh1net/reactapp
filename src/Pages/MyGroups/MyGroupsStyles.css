@@ -59,6 +59,7 @@ align-items: center;
 }
 
 .side__groups__item__member{
+    
     display: inline-block;
     font-family: 'Raleway', sans-serif;
     border:5px solid #EBA600;
@@ -150,7 +151,7 @@ align-items: center;
     margin-top:5px;
     max-height: 50px;
     padding-left: 5px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .group__admin{

@@ -435,14 +435,14 @@ function testImgSelect(id){
                             <div className="ct__answer" key={answer.id}>
                             {
                               question.type=="oneIsRight"
-                              ?<div>
+                              ?<div className="ct__element__answer__container">
                                 <input checked={answer.isRight?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.isRight} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
                                 <input className="ct__input__answer" type="text" placeholder='Введите ответ'value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
                                 <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>
 
                               </div>
                             :question.type=="severalIsRight"
-                            ?<div>
+                            ?<div className="ct__element__answer__container">
                                 <input className="ct__check__btn" type="checkbox" value={answer.isRight} checked={answer.isRight?true:false}  name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
                                 <input className="ct__input__answer" type="text" placeholder='Введите ответ' value={answer.answerVal} onChange={(e)=>{inputAnswer(iQ,iA,question.type,e)}}/>
                                 <button className="ct__delete__btn" onClick={()=>removeAnswer(question.id,answer.id)}>удалить </button>

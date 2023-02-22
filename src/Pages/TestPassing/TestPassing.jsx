@@ -39,12 +39,12 @@ function TestPassing(){
     else{
       setTimerTime({...timerTime,seconds:timerTime.seconds-1})
       localStorage.setItem('durationLast',JSON.stringify({...timerTime,seconds:timerTime.seconds-1}))
+      setTimerTime({...timerTime,seconds:timerTime.seconds-1})
+      localStorage.setItem('durationLast',JSON.stringify({...timerTime,seconds:timerTime.seconds-1}))
     }
   }
  }
   
-
-
   useEffect(() => {
   localStorage.setItem('passing','true')
   localStorage.setItem('groupName',params.groupName)
@@ -170,6 +170,7 @@ function chooseRightCaseSeveral(iQ,iA,e){
     }
  
      localStorage.removeItem('passing');
+     localStorage.removeItem('durationLast')
      localStorage.removeItem('groupName');
      localStorage.removeItem('testID');
      setIsPassing(false);
@@ -185,36 +186,34 @@ function chooseRightCaseSeveral(iQ,iA,e){
         :
         <div className='bodyy'>
             <div className="timer">{timerTime.minutes<10?'0'+timerTime.minutes:timerTime.minutes}:{timerTime.seconds<10?'0'+timerTime.seconds:timerTime.seconds}</div>
-            <div className="test__passing__bg">
-            <div className="passing__test__title">{passingTest.title}</div>
-                <div className="test__passing__container">
+              <div className="test__passing__container">
+                <div className="passing__test__title">{passingTest.title}</div>
                 {passingTest.questions.map((question,iQ)=> <div key={question.id} className="test__passing__question">
              
-                <div>{question.qText}</div>
-                <div>Баллы за вопрос:{question.mark}</div>
-                {!question.pic
-                ?''
-                :<img className='passing__question__img' src={question.pic} alt=""/>
-                }
-                {
+                <div className="test__passing__question__name">{iQ+1}. {question.qText}<div className="test__passing__mark">{question.mark} {question.mark==1?"бал":"бала"}</div></div>
+                  {!question.pic
+                  ?''
+                  :<img className='passing__question__img' src={question.pic} alt=""/>
+                  }
+                  {
                             question.answers.map((answer,iA)=>
                             <div className="ct__answer" key={answer.id}>
                             {
                               question.type=="oneIsRight"
-                              ?<div>
+                              ?<div className="test__passing__input__answer">
                                 <input checked={answer.studentChose?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.studentChose?true:false} onChange={(e)=>{chooseRightCaseSingle(iQ,iA,e)}}/>
                                 <div className='passing__answer'>{answer.answerVal}</div>
                               </div>
                             :question.type=="severalIsRight"
-                            ?<div>
+                            ?<div className="test__passing__input__answer">
                                 <input className="ct__check__btn" type="checkbox" value={answer.studentChose} checked={answer.studentChose?true:false}  name={'severalIsRight'+iQ} onChange={(e)=>{chooseRightCaseSeveral(iQ,iA,e)}}/>
                                 <div className='passing__answer'>{answer.answerVal}</div>
 
                             </div>
                             :
                             question.type=="typeAnswer"?
-                            <div>
-                                <input className="ct__input__answer2" type="text" placeholder='Напишите сюда правильный ответ' value={answer.typedCase} onChange={(e)=>{inputAnswer(iQ,iA,e)}}/>
+                            <div className="test__passing__input__answer">
+                                <textarea className="ct__input__answer2" type="text" placeholder='Напишите сюда правильный ответ' value={answer.typedCase} onChange={(e)=>{inputAnswer(iQ,iA,e)}}/>
                             </div>
                             : <div></div>
                             
@@ -224,15 +223,13 @@ function chooseRightCaseSeveral(iQ,iA,e){
                             
                             </div>)
                             }
+                
                 </div>
                 )
 
                 }
-                
-                </div>
-            </div>
-            <button onClick={()=>confirmTest()}>Закончить тест</button>
-
+                <button className="test__passing__ending__button" onClick={()=>{confirmTest()}}>Завершить тест</button>
+              </div>
         </div>
     )
 }

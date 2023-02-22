@@ -122,6 +122,11 @@ margin: 5px 0;
     box-shadow: inset 1px 1px 3px -1px rgba(0, 0, 0, 0.6);
 }
 
+.ct__element__answer__container{
+    display:flex;
+    flex-direction:row;
+}
+
 .ct__input__question{
     border: 3px solid #EBA600;
     font-family: sans-serif;
