@@ -80,7 +80,7 @@ function inputAnswer(iQ,iA,e){
 
     setPassingTest({...passingTest, questions:passingTest.questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,typedCase:e.target.value}:answer)}:question)})
 
-  }
+}
 
 function chooseRightCaseSeveral(iQ,iA,e){
 

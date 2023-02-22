@@ -7,11 +7,12 @@
 .test__passing__bg{
     margin: 0 auto;
     display: flex;
-    padding:20px;
+    
+    padding:0 20px;
     flex-direction: column;
     background-color: rgb(216, 216, 216);
     justify-content: center;
-    width: 95%;
+    width: 70%;
     overflow-y: auto;
 }
 
@@ -22,6 +23,7 @@
     flex-direction: column;
     background-color: rgb(255, 255, 255);
     justify-content: center;
+    align-items: center;
     border-radius: 30px;
     width: 95%;
     height: 100%;
@@ -38,8 +40,16 @@
     box-shadow: 0px 0px 5px black;
     background-color: beige;
 }
-
+.test__passing__question{
+width: 70%;
+padding: 10px;
+display: flex;
+flex-direction: column;
+background-color: bisque;
+border-radius: 25px;
+margin: 20px 0;
+}
 .passing__question__img{
-  width: 300px;
-  height: 300px;
+width: 20%;
+height: 30%;
 }
