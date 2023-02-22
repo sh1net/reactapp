@@ -8,26 +8,38 @@ import { testContext } from '../Context/useContext'
 import { useState } from 'react'
 import TestPassing from '../Pages/TestPassing/TestPassing'
 function AppRouter() {
-    const{isAuth}= useContext(authContext)
- 
+    const{isAuth}= useContext(authContext);
+  const {isPassing}=useContext(testContext);
 
   return (
     
     
       isAuth
       ?
-      <Routes> 
-         {privateRoutes.map(route=>
+      
+        isPassing
+        ?  <Routes> 
+        <Route exact  path="/testPassing/:groupName/:testID" element={<TestPassing/>}/>
+        <Route exact path="/" element={ <Navigate replace to={"/testPassing/"+localStorage.getItem('groupName')+"/"+localStorage.getItem('testID')}/>}/>
+        <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
+        <Route element={ <Navigate replace to={"/testPassing/:"+localStorage.getItem('groupName')+"/"+localStorage.getItem('testID')}/>} />
+        </Routes> 
+        :<Routes>
+          {privateRoutes.map(route=>
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
-        <Route exact  path="/testPassing/:groupName/:testID" element={<TestPassing/>}/>
+        
         <Route exact path="/" element={ <Navigate replace to={"/main"}/>}/>
         <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
         <Route element={ <Navigate replace to={"/main"}/>} />
+        </Routes>
+        
+        
+         
         
 
-        </Routes>
+        
         
         
       : <Routes>

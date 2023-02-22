@@ -10,8 +10,8 @@ function CreaterSelect({minute,hour,hours,minutes,onChangeHour,onChangeMinute })
       >
         <option disabled={true} value={""}>
         {hours.length>24
-          ?<div>Минуты</div>
-          :<div>Часы</div>
+          ?'Минуты'
+          :'Часы'
           }
         </option>
         {hours.map((option) => (
@@ -26,8 +26,8 @@ function CreaterSelect({minute,hour,hours,minutes,onChangeHour,onChangeMinute })
       onChange={(e)=>{onChangeMinute(e)}}>
         <option disabled={true} value={""}>
           {hours.length>24
-          ? <div> Секунды</div>
-          :<div>Минуты</div>
+          ? 'Секунды'
+          :'Минуты'
           }
         </option>
         {minutes.map((option) => (

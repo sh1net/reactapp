@@ -12,11 +12,11 @@ import Loader from '../../Components/Loader/Loader'
 import { useState } from 'react'
 import './TestPassing.css'
 import { useParams } from 'react-router-dom'
-
+import swal from 'sweetalert'
 
 function TestPassing(){
     const {groups,setGroups}=useContext(groupsContext)
-  
+    const {isPassing,setIsPassing}=useContext(testContext)
     const [fetchGroups,isLoading]=useFetching(async()=>{
       const fetchedGroups= await PostService.getGroups();
       if(fetchedGroups===null){
@@ -32,13 +32,13 @@ function TestPassing(){
  function getTime(){
  
   if(timerTime!==null){
-    if(timerTime.minutes-1<0){
-      setTimerTime({hours:timerTime.hours-1,minutes:59})
-      localStorage.setItem('durationLast',JSON.stringify({hours:timerTime.hours-1,minutes:59}))
+    if(timerTime.seconds-1<0){
+      setTimerTime({minutes:timerTime.minutes-1,seconds:59})
+      localStorage.setItem('durationLast',JSON.stringify({minutes:timerTime.minutes-1,seconds:59}))
     }
     else{
-      setTimerTime({...timerTime,minutes:timerTime.minutes-1})
-      localStorage.setItem('durationLast',JSON.stringify({...timerTime,minutes:timerTime.minutes-1}))
+      setTimerTime({...timerTime,seconds:timerTime.seconds-1})
+      localStorage.setItem('durationLast',JSON.stringify({...timerTime,seconds:timerTime.seconds-1}))
     }
   }
  }
@@ -46,7 +46,10 @@ function TestPassing(){
 
 
   useEffect(() => {
-  
+  localStorage.setItem('passing','true')
+  localStorage.setItem('groupName',params.groupName)
+  localStorage.setItem('testID',params.testID);
+  setIsPassing(true)
   fetchGroups();
   }, [])
 
@@ -59,8 +62,8 @@ function TestPassing(){
       }
       else
       setTimerTime({
-        hours:new Date(test.durationTime).getHours(),
-        minutes:new Date(test.durationTime).getMinutes()
+        minutes:new Date(test.durationTime).getMinutes(),
+        seconds:new Date(test.durationTime).getSeconds()
     })
     }
     }, [groups])
@@ -89,13 +92,99 @@ function chooseRightCaseSeveral(iQ,iA,e){
   }
 
   function chooseRightCaseSingle(iQ,iA,e){
-    if(e.target.value==='false') {setPassingTest({...passingTest, questions:passingTest.questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,isRight:true}:{...answer,isRight:false})}:question)})}
+    if(e.target.value==='false') {setPassingTest({...passingTest, questions:passingTest.questions.map((question,i)=>i==iQ?{...question,answers:question.answers.map((answer,ia)=>ia==iA?{...answer,studentChose:true}:{...answer,studentChose:false})}:question)})}
   }
+
+  function confirmTest(){
+    const questions=passingTest.questions;
+    for (let i = 0; i < questions.length; i++) {
+      let atLeastOneIsTrue=false;
+      for (let j = 0; j < questions[i].answers.length; j++) {
+      if(questions[i].type==='oneIsRight'||questions[i].type==='severalIsRight'){
+      
+       
+          if(questions[i].answers.find(answer=>answer.studentChose===true)){
+           atLeastOneIsTrue=true;
+          }
+          if(!atLeastOneIsTrue){
+            swal({
+              icon:"error",
+              title:"Ошибка",
+              text:"В вопросе №" +(i+1)+" не выбран ни один ответ"
+            })
+            return;
+          }
+        }
+      
+        if(questions[i].type==='typeAnswer'){
+          if(!questions[i].answers[j].typedCase){
+            swal({
+              icon:"error",
+              title:"Ошибка",
+              text:"В вопросе №" +(i+1)+" в поле ответа нет значения"
+            })
+            return;
+          }
+        }
+      }
+    }
+    swal({
+      icon:"warning",
+      title:"Завешить тест?",
+      buttons: ["Нет", "Да"]
+    }).then((result)=>{
+     if(result===null){
+      return;
+     }
+     else{
+      const maxMark=questions.reduce((sum,question)=>sum+=Number(question.mark),0)
+      let userMark=0;
+     for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if(questions[i].type==='oneIsRight'){
+        if(questions[i].answers[j].studentChose&&questions[i].answers[j].isRight){
+          userMark+=(+questions[i].mark);
+        }
+      }
+      if(questions[i].type==='typeAnswer'){
+        if(questions[i].answers[j].typedCase.toLowerCase()===questions[i].answers[j].rightCase.toLowerCase()){
+          userMark+=(+questions[i].mark);
+        }
+      }
+     }
+    }
+    for (let i = 0; i < questions.length; i++) {
+      
+        if(questions[i].type==='severalIsRight'){
+          let allRightCases= questions[i].answers.filter(answer=>answer.isRight).length;
+          let studentChosesRight=0;
+          for (let j = 0; j < questions[i].answers.length; j++) {
+        if(questions[i].answers[j].studentChose&&questions[i].answers[j].isRight){
+          studentChosesRight++;
+        }
+      }
+      if(allRightCases===studentChosesRight){
+        userMark+=(+questions[i].mark);
+      }
+     }
+    }
+ 
+     localStorage.removeItem('passing');
+     localStorage.removeItem('groupName');
+     localStorage.removeItem('testID');
+     setIsPassing(false);
+     }
+   
+    }
+  )
+      
+
+}
     return(isLoading||passingTest===null
         ?<Loader/>
         :
         <div className='bodyy'>
-            <div className="timer">{timerTime.hours<10?'0'+timerTime.hours:timerTime.hours}:{timerTime.minutes<10?'0'+timerTime.minutes:timerTime.minutes}</div>
+            <div className="timer">{timerTime.minutes<10?'0'+timerTime.minutes:timerTime.minutes}:{timerTime.seconds<10?'0'+timerTime.seconds:timerTime.seconds}</div>
             <div className="test__passing__bg">
             <div className="passing__test__title">{passingTest.title}</div>
                 <div className="test__passing__container">
@@ -142,6 +231,8 @@ function chooseRightCaseSeveral(iQ,iA,e){
                 
                 </div>
             </div>
+            <button onClick={()=>confirmTest()}>Закончить тест</button>
+
         </div>
     )
 }

@@ -354,7 +354,7 @@ function testImgSelect(id){
                {parseInt(testOpenTime.hour)< new Date().getHours()
                ||(parseInt(testOpenTime.hour)< new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
                ||(parseInt(testOpenTime.hour)=== new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
-               ?swal
+               ?<div style={{margin:'-60px'}}>Установленно прошедшее время <br /> Тест переносится на завтра</div>
                 : ''
                }
                 <div className="ct__selectors__item">

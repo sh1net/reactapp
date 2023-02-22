@@ -16,7 +16,7 @@ import TestPassing from '../TestPassing/TestPassing'
 
 function PassTest() {
   const {groups,setGroups}=useContext(groupsContext)
-  
+  const {setIsPassing}=useContext(testContext)
   const [fetchGroups,isLoading]=useFetching(async()=>{
     const fetchedGroups= await PostService.getGroups();
     if(fetchedGroups===null){
@@ -94,7 +94,8 @@ useEffect(() => {
                 .
                 {new Date(userTest.openTime).getFullYear()}
               </div>
-              <button className='pass__test__button' onClick={()=>navigate('/TestPassing/'+group.groupName+'/'+userTest.id)} disabled={dateDiff(new Date(userTest.openTime))<=0
+              <button className='pass__test__button' onClick={()=>{setIsPassing(true)
+                navigate('/TestPassing/'+group.groupName+'/'+userTest.id)}} disabled={dateDiff(new Date(userTest.openTime))<=0
                 &&dateDiff(new Date(userTest.closeTime))>=0?false:true}>Пройти</button>
               <div>
                 {dateDiff(new Date(userTest.closeTime))<=0
