@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import GroupsModal from '../../Components/GroupsModal/GroupsModal'
 import { useState } from 'react'
 import GroupsStatsModal from '../../Components/AboutUs/GroupsStatsModal/GroupsStatsModal'
+
 function MyTests() {
 const {userTests,setUserTests}=useContext(testContext)
 
@@ -39,10 +40,19 @@ const [fetchResults]=useFetching(async()=>{
   }
   else{
     if(groups!==undefined&&groups!==null){
- const myGroups=groups.filter(group=>group.admin===localStorage.getItem('userLogin'));
+ const myGroups=(groups.filter(group=>group.admin===localStorage.getItem('userLogin')));
     if(myGroups!==null&&myGroups!==undefined){
-      console.log(fetchedResults)
-      const neededResults=fetchedResults.filter((result,i)=>result.group===myGroups[i].groupName).filter(result=>result.testResults!==undefined);
+      function compareResultsAndMyGroups(group,myGroups){
+        for (let i = 0; i < myGroups.length; i++) {
+          if(myGroups[i].groupName===group){
+            console.log(myGroups[i].groupName+' | '+group)
+            return true
+          }
+          
+        }
+        return false;
+      }
+      const neededResults=fetchedResults.filter((result)=>compareResultsAndMyGroups(result.group,myGroups));
       setResults(neededResults)
     }
     }
@@ -126,22 +136,25 @@ function checkGroup(groupId,userTestId){
 function visibleStatButton(userTestId){
   
   const thisTestResults=checkGroupsStats(userTestId);
-
+console.log(thisTestResults)
   for (let i = 0; i < thisTestResults.length; i++) {
+  
     for (let j = 0; j < thisTestResults[i].testResults.length; j++) {
-     if(thisTestResults[i].testResults[j].testID===userTestId&&thisTestResults[i].testResults[j].usersResults!==undefined){
+     
+     if(thisTestResults[i].testResults[j].testID===userTestId&&thisTestResults[i].testResults[j].usersResults!==''){
+   
       return true
      }
       
     }
     
   }
-
+return false;
 }
 function checkGroupsStats(userTestId){
   
 const thisTestResults=results.map(result=>result?{...result,testResults:result.testResults!==undefined?result.testResults.filter(testResult=>testResult.testID===userTestId&&testResult.usersResults!==undefined):''}:result)
-
+console.log(thisTestResults)
 return thisTestResults;
 
 }
@@ -202,14 +215,13 @@ return thisTestResults;
             <div className="test__item__buttons__left">
             <button className="my__test__button" onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
             <button className="my__test__button" onClick={()=>{removeTest(userTest.id,userTest.title)}}>Удалить</button>
-            <button className="my__test__button" onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
             <GroupsStatsModal results={stats.testResult} visible={stats.isVisible} setStats={setStats}/>
            <button disabled={!visibleStatButton(userTest.id)} className="my__test__button" onClick={()=>{setStats({isVisible:true,testResult:checkGroupsStats(userTest.id)})}}>Статистика</button>
           </div>
             <div className="test__item__selector">
             
             <GroupsModal isLoading={isLoading} visible={visible.isVisible} setVisible={setVisible} groups={groups} checkGroup={checkGroup} addTestGroup={addTestGroup} userTest={visible.userTest} />
-              <button disabled={checkGroupsStats(userTest.id)} className="mt__button__groups" onClick={()=>setVisible({isVisible:true,userTest:userTest})}>Выбор групп для тестирования</button>
+              <button disabled={visibleStatButton(userTest.id)} className="mt__button__groups" onClick={()=>setVisible({isVisible:true,userTest:userTest})}>Выбор групп для тестирования</button>
             </div>
             </div>
             </div>
