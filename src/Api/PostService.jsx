@@ -100,6 +100,24 @@ static async getGroups(){
   return data;
 }
 
+static async getResults(){
+  const data=await get(child(ref(db),'/results')).then(snapshot=>{
+
+    if (snapshot.exists()) {
+
+      return snapshot.val();
+
+    } else  return []
+    
+
+  }).catch((error) => {
+
+    console.error(error);
+
+  });
+  return data;
+}
+
 static async setGroups(groups){
  set(ref(db,'/groups'),groups)
 }
@@ -150,13 +168,21 @@ static  async getTestImg(file,setQuestions,questions,id){
     })
   }
 
-  static async deleteTestFromGroup(id){
+  static async deleteTestFromGroup(groupId,userTestId){
     const groups=await PostService.getGroups();
-    set(ref(db,'/groups'),groups.map(group=>group.tests!==undefined?{...group,tests:group.tests.filter(userTest=>userTest.id!==id)}:group));
+    set(ref(db,'/groups'),groups.map(group=>group.id===groupId?{...group,tests:[...group.tests.filter(userTest=>userTest.id!==userTestId)]}:group));
+  }
+
+  static async addTestToGroupAfterRedact(groupId,editedTestId,editedTest){
+    const groups=await PostService.getGroups();
+    set(ref(db,'/groups'),groups.map(group=>group.id===groupId?{...group,tests:[...group.tests.map(test=>test.id===editedTestId?editedTest:test)]}:group));
 
   }
   
-
+  static async addTestToGroup(groupId,userTestId,userTests){
+    const groups=await PostService.getGroups();
+    set(ref(db,'/groups'),groups.map(group=>group.id===groupId?{...group,tests:group.tests?[...group.tests,{...userTests.find(userTest=>userTest.id===userTestId)}]:[{...userTests.find(userTest=>userTest.id===userTestId)}]}:group));
+  }
 
   static async uploadGroupImg(file){
     const groupsImgRef =sRef(storage,'groupsImages/'+file.name);
@@ -173,5 +199,36 @@ static  async getTestImg(file,setQuestions,questions,id){
   static async joinGroup(id){
     const groups=await PostService.getGroups();
     set(ref(db,'/groups'),groups.map(group=>group.id===id?{...group,members:[...group.members,localStorage.getItem('userLogin')]}:group))
+   }
+
+   static async setResult(result){
+    const results=await PostService.getResults();
+    set(ref(db,'/results'),[...results,result])
+   }
+
+   static async removeResult(groupName){
+    const results=await PostService.getResults();
+    set(ref(db,'/results'),results.filter(result=>result.group!==groupName));
+   }
+   static async setResultTestId(groupName,testID){
+    const results=await PostService.getResults();
+    set(ref(db,'/results'),results.map(result=>result.group===groupName?{...result,testResults:result.testResults!==undefined?[...result.testResults,{testID:testID}]:[{testID:testID}]}:result))
+    
+
+   }
+   static async removeResultTestId(groupName,testID){
+    const results=await PostService.getResults();
+    set(ref(db,'/results'),results.map(result=>result.group===groupName?{...result,testResults:result.testResults.filter(testResult=>testResult.testID!==testID)}:result))
+    
+    
+   }
+
+   static async setUserResult(groupName,testID,userResult){
+    const results=await PostService.getResults();
+    set(ref(db,'/results'),results
+    .map(result=>result.group===groupName
+      ?{...result,testResults:result.testResults.map(testResult=>testResult.testID===testID
+        ?{...testResult,usersResults:testResult.usersResults
+          !==undefined?[...testResult.usersResults,userResult]:[userResult]}:testResult)}:result));
    }
 }

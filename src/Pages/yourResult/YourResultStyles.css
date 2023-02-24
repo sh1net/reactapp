@@ -1,0 +1,27 @@
+.correct_question{
+    font-size: 20px;
+    margin-left:50px;
+    font-family: sans-serif;
+    padding:20px;
+    margin-right:100px;
+    margin-bottom:30px;
+    font-weight: bold;
+    display:flex;
+    flex-direction: column;
+    border:3px solid rgb(39, 212, 33);
+    border-radius: 20px;
+}
+
+.incorrect_question{
+    font-size: 20px;
+    margin-left:50px;
+    font-family: sans-serif;
+    padding:20px;
+    margin-right:100px;
+    margin-bottom:30px;
+    font-weight: bold;
+    display:flex;
+    flex-direction: column;
+    border:3px solid rgb(200, 22, 16);
+    border-radius: 20px;
+}

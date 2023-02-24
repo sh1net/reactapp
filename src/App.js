@@ -19,6 +19,7 @@ function App(){
   const [userTests, setUserTests] = useState(null)
   const [groups,setGroups]=useState(null)
   const [isPassing, setIsPassing] = useState(false)
+  const [results, setResults] = useState(null)
   const [fetchUsers,isLoading]=useFetching(async()=>{
    const fetchedUsers= await PostService.getUsers();
     setUsers(fetchedUsers);
@@ -39,6 +40,9 @@ function App(){
       snapshot.forEach((childSnapshot) => {
         if(childSnapshot.key==='groups'){
           setGroups(childSnapshot.val())
+        }
+        if(childSnapshot.key==='results'){
+          setResults(childSnapshot.val())
         }
       });
     }, {
@@ -65,7 +69,7 @@ function App(){
   :
     <authContext.Provider value={{isAuth,setIsAuth,users,setUsers,user,setUser}}>
       <groupsContext.Provider value={{groups,setGroups}}>
-        <testContext.Provider value={{userTests,setUserTests,isPassing,setIsPassing}}>
+        <testContext.Provider value={{userTests,setUserTests,isPassing,setIsPassing,results,setResults}}>
         <BrowserRouter >
         <AppRouter/>
         </BrowserRouter>

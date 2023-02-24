@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { testContext } from '../Context/useContext'
 import { useState } from 'react'
 import TestPassing from '../Pages/TestPassing/TestPassing'
+import YourResult from '../Pages/yourResult/YourResult'
 function AppRouter() {
     const{isAuth}= useContext(authContext);
   const {isPassing}=useContext(testContext);
@@ -29,7 +30,7 @@ function AppRouter() {
         <Route key={route.path} exact={route.exact} path={route.path}  element={route.element}/>
         )
         }
-        
+        <Route exact  path="/yourResult/:groupName/:testID" element={<YourResult/>}/>
         <Route exact path="/" element={ <Navigate replace to={"/main"}/>}/>
         <Route  path="*" element={ <Navigate replace  to={"/"}  />}/>
         <Route element={ <Navigate replace to={"/main"}/>} />

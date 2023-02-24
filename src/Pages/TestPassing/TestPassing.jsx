@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom'
 import swal from 'sweetalert'
 
 function TestPassing(){
+  const navigate=useNavigate();
     const {groups,setGroups}=useContext(groupsContext)
     const {isPassing,setIsPassing}=useContext(testContext)
     const [fetchGroups,isLoading]=useFetching(async()=>{
@@ -24,8 +25,9 @@ function TestPassing(){
       }
        setGroups(fetchedGroups);
      })
-  
-    const [passingTest, setPassingTest] = useState(null)
+     
+     
+  const [passingTest, setPassingTest] = useState(null)
 
   const [timerTime, setTimerTime] = useState(null)
 
@@ -168,12 +170,29 @@ function chooseRightCaseSeveral(iQ,iA,e){
       }
      }
     }
- 
+   
      localStorage.removeItem('passing');
      localStorage.removeItem('durationLast')
      localStorage.removeItem('groupName');
      localStorage.removeItem('testID');
-     setIsPassing(false);
+     
+    PostService.setUserResult(params.groupName,params.testID,{nickname:localStorage.getItem('userLogin'),userMark:userMark,passedTest:passingTest})
+    swal({
+      icon:"warning",
+      title:"Хотите узнать результаты теста?",
+      buttons: ["Нет (вы вернетесь в профиль)", "Да, хочу"]
+    }).then((result)=>{
+     if(result===null){
+      setIsPassing(false);
+      navigate('/myProfile')
+     }
+     else{
+      setIsPassing(false);
+      navigate('/yourResult/'+params.groupName+'/'+params.testID)
+     }
+     
+    })
+    
      }
    
     }

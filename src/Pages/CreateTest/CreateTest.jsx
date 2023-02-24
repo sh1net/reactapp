@@ -6,7 +6,7 @@ import CreaterSelect from '../../Components/CreaterSelect/CreaterSelect'
 import { useState } from 'react'
 import { useContext } from 'react'
 import { useEffect } from 'react'
-import { authContext, testContext } from '../../Context/useContext'
+import { authContext, groupsContext, testContext } from '../../Context/useContext'
 import PostService from '../../Api/PostService'
 import { useFetching } from '../../hooks/useFething'
 import swal from 'sweetalert'
@@ -17,7 +17,7 @@ function CreateTest() {
 
 const {users}=useContext(authContext)
 const {userTests,setUserTests}=useContext(testContext)
-
+const {groups,setGroups}=useContext(groupsContext)
 const navigate=useNavigate();
 
 
@@ -105,10 +105,9 @@ const navigate=useNavigate();
   
 useEffect(() => {
   if(currentTest.author!==''&&currentTest.editMode===false){
-    console.log(userTests)
     const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id;
     PostService.setUserTests(userTests,id);
-      navigate('/myTests');
+     
   }
 }, [currentTest.editMode])
 
@@ -116,7 +115,7 @@ useEffect(() => {
   useEffect(() => {
     
     if(currentTest.author!==''&&currentTest.editMode===false&&currentTest.title!==''){
-      console.log(currentTest);
+   
       const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id;
       setUserTests([...userTests,currentTest]);
       PostService.setUserTest(currentTest,userTests,id)
@@ -132,10 +131,15 @@ useEffect(() => {
       console.log(currentTest)
       setUserTests([...userTests.map((userTest)=>userTest.id==currentTest.id?{...currentTest,editMode:false}:userTest)]);
       setCurrentTest({...currentTest,editMode:false,title:''});
+      (groups.find(group=>group.tests!==undefined?group.tests.find(test=>test.id===currentTest.id?PostService.addTestToGroupAfterRedact(group.id,test.id,currentTest):false):null))
+     
       swal({
         icon:"success",
         title:"Отлично!",
         text:"Тест '"+currentTest.title+ "' успешно отредактирован!"
+      }).then((val)=>{
+       
+        navigate('/myTests');
       })
     }
   }, [currentTest])

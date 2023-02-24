@@ -1,0 +1,60 @@
+.groupsStatsModal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.289);
+    }
+    
+    .groupsStatsModal.active{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        
+    }
+    
+    .groupsStatsModalContent{
+    padding: 25px;
+    background-color: #d8d8d8;
+    border-radius: 25px;
+    min-width: 500px;
+    max-height: 250px;
+    border: 3px solid #EBA600;
+    
+    }
+    
+    .groupsStatsModalContentContainer{
+        overflow-y: auto;
+        max-height: 200px;
+    }
+    .userName{
+       
+        
+        font-size: 20px;
+        color: teal;
+      
+    }
+    .userMark{
+        font-size: 20px;
+        color: rgb(2, 44, 8);
+    }
+
+    .userStat{
+        padding: 3px;
+       width: 50%;
+        border-bottom: 2px solid black;
+        border-left: 2px solid black ;
+        border-radius: 10px;
+        margin: 10px 0;
+
+    }
+    .groupName{
+        font-size: 20px;
+        font-weight: 700;
+        display: flex;
+    }
+
+  

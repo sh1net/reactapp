@@ -14,11 +14,7 @@ import AddingGroups from '../../Components/AddingGroups/AddingGroups'
 import swal from 'sweetalert'
 function MyGroups() {
     const {groups, setGroups}=useContext(groupsContext)
-    const [addingGroups, setAddingGroups] = useState([])
-    const [fetchGroups,isLoading]=useFetching(async()=>{
-        const fetchedGroups= await PostService.getGroups();
-         setGroups(fetchedGroups);
-       })
+    
 
 
   const navigate=useNavigate();
@@ -26,12 +22,10 @@ function MyGroups() {
      
   
 
-useEffect(() => {
-    fetchGroups();
-  }, [])
 
 
-console.log(addingGroups)
+
+
 function leaveGroup(groupID){
 setGroups([...groups.map(group=>group.id===groupID?{...group,members:group.members.filter(member=>member!==localStorage.getItem('userLogin'))}:group)])
 PostService.leaveFromGroup(groupID);
@@ -41,13 +35,12 @@ PostService.leaveFromGroup(groupID);
 
 
 
-function removeGroup(id){
+function removeGroup(id,groupName){
     setGroups(groups.filter(group=>group.id!==id))
     PostService.removeGroup(id)
+    PostService.removeResult(groupName)
 }
-  return (isLoading
-    ?<Loader/>
-    :
+  return (
     <div>
         <Header/>
         <Navbar/>
@@ -55,7 +48,7 @@ function removeGroup(id){
             <div className="groups__container">
                 <div className="side__groups">
                 <AddingGroups groups={groups} setGroups={setGroups}/>
-                {groups.reverse().map((group)=>group.admin===localStorage.getItem('userLogin')?
+                {[...groups].reverse().map((group)=>group.admin===localStorage.getItem('userLogin')?
                  <div key={group.id} className='side__groups__item__admin'>
                      <div>
                         <div className="group__title">{group.groupName} 
@@ -74,7 +67,7 @@ function removeGroup(id){
                         : ''
                             }
                             </div>
-                        <button className="mg__delete__button" onClick={()=>removeGroup(group.id)}>Удалить группу</button>
+                        <button className="mg__delete__button" onClick={()=>removeGroup(group.id,group.groupName)}>Удалить группу</button>
                     </div>
                     
                  </div>:

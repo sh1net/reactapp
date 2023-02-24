@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import PostService from '../../Api/PostService'
+import { testContext } from '../../Context/useContext'
+import { useContext } from 'react'
 import swal from 'sweetalert'
 
 function AddingGroups({groups,setGroups}) {
+
     const [addingGroups, setAddingGroups] = useState([])
-   
+
     function addGroup(){
         setAddingGroups([{admin:localStorage.getItem('userLogin'),id:Date.now(),groupName:'',members:[''],groupImg:''},...addingGroups])
       }
@@ -41,6 +44,7 @@ function AddingGroups({groups,setGroups}) {
         setGroups([...groups,group])
         setAddingGroups(addingGroups.filter(group=>group.id!==id))
         PostService.setGroup(group);
+        PostService.setResult({group:group.groupName})
       }
       function cancelGroup(id){
         setAddingGroups(addingGroups.filter(group=>group.id!==id))
