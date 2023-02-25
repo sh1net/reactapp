@@ -16,7 +16,11 @@
     overflow-y: auto;
 }
 
-
+.date__time{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 .group__tests{
     margin: 20px 10px;
     display: flex;
@@ -43,7 +47,8 @@
 
 
 
-.test__item__date{
+.pass__test__item__date{
+    display:flex;
     font-size: 18px;
     margin: 5px 0;
 }

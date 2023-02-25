@@ -16,9 +16,6 @@ align-items: center;
 margin: 10px;
 margin-top: 10px;
 }
-.about__item:nth-child(1){
-    justify-content: flex-start;
-}
 
 .about__item__text{
 font-family: 'Montserrat', sans-serif;

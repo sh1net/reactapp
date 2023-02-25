@@ -81,7 +81,7 @@ useEffect(() => {
             <div className="tests__item__title">{userTest.title}</div>
             <div className="test__item__close-open__time">
               
-              <div className="test__item__date">
+              <div className="pass__test__item__date">
               
                 {new Date(userTest.openTime).getDate()<10
                 ?  <div>0{new Date(userTest.openTime).getDate()}</div>

@@ -15,7 +15,7 @@
     display: flex;
     max-width:100%;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height:77vh;
 
     max-height:77vh;

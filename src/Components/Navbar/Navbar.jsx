@@ -38,6 +38,7 @@ function Navbar() {
     </div>
     <NavLink className='nav__link' to='/about'>О нас</NavLink>
     <NavLink to ='/support' className='nav__link'>Связаться с нами</NavLink>
+    <NavLink to ='/tutorial' className='nav__link'>Обучение</NavLink>
     </div>
     <div className="navbar__right">
       <NavLink to ='/myProfile' className="nav__user__profile">
