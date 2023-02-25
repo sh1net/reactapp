@@ -57,4 +57,9 @@
         display: flex;
     }
 
+    .stats__button{
+        background-color: #EBA600;
+        border:2px solid #EBA600;
+        border-radius:10px;
+    }
   
