@@ -13,7 +13,7 @@ import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
 import GroupsModal from '../../Components/GroupsModal/GroupsModal'
 import { useState } from 'react'
-import GroupsStatsModal from '../../Components/AboutUs/GroupsStatsModal/GroupsStatsModal'
+import GroupsStatsModal from '../../Components/GroupsStatsModal/GroupsStatsModal'
 
 function MyTests() {
 const {userTests,setUserTests}=useContext(testContext)

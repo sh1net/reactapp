@@ -76,7 +76,7 @@ function YourResult() {
         :
         <div className='bodyy'>
               <div className="test__passing__container">
-              <button className="test__passing__ending__button" onClick={()=>{navigate('/myProfile')}}>Выйти в профиль</button>
+              
 
                 <div className="passing__test__title">{result.passedTest.title}</div>
                 <div className="passed__test__mark">Ваши баллы: {result.userMark}/{result.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</div>
@@ -177,8 +177,9 @@ function YourResult() {
                 
                 </div>
                 )
-
+                            
                 }
+                <button className="test__passing__ending__button" onClick={()=>{navigate('/myProfile')}}>Выйти в профиль</button>
               </div>
         </div>
   )

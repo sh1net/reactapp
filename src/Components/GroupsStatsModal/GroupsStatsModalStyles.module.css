@@ -34,7 +34,7 @@
        
         
         font-size: 20px;
-        color: teal;
+        font-weight: bold;
       
     }
     .userMark{
@@ -45,8 +45,8 @@
     .userStat{
         padding: 3px;
        width: 50%;
-        border-bottom: 2px solid black;
-        border-left: 2px solid black ;
+        border-bottom: 2px solid #EBA600;
+        border-left: 2px solid #EBA600;
         border-radius: 10px;
         margin: 10px 0;
 

@@ -1,0 +1,42 @@
+.body{
+    display: flex;
+    background-color: rgb(216, 216, 216);
+    font-size: 20px;
+    flex-direction: column;
+    align-items: center;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding:30px;
+}
+
+p{
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+.tutorial__img{
+    max-width:80%;
+    width:fit-content;
+}
+
+.tutorial__text{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.tt__img__container{
+    display:flex;
+    justify-content: space-around;
+}
+
+.tutorial__oglavlenie{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
