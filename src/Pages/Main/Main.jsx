@@ -13,14 +13,9 @@ import MainInformation from '../../Components/MainInformation/MainInformation';
 function Main() {
  
   
-    
   
-    
-   
    
   return (
-   
-    
     <div>
       <Header/>
         <Navbar/>

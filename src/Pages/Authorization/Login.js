@@ -17,39 +17,37 @@ function Login() {
   const [loginUser, setLoginUser] = useState({
     login: "",
     password: "",
-    id:user.id??''
+    id:user.id??0
   });
 
 
   const [fetchUsers,isLoading]=useFetching(async()=>{
     const fetchedUsers=await PostService.getUsers();
-
-    if(fetchedUsers.length<users.length){
-      PostService.setUsers(users);
+      if(fetchedUsers.find(userf=>userf.login===user.login)){
         setLoginUser({
           login: user.login,
           password: user.password,
-          id:''
-        });
-        
-    }
-    setUser({
-    login: "",
-    password: "",
-    email:"",
-    id:0,
-    pic:''
-  }
-    )
-})
+          id:user.id
+        })
+      }
+      else{
+        setLoginUser({
+          login: '',
+          password: '',
+          id:0
+        })
+      }
+      }
+)
 
   const navigate=useNavigate();
 
 
+
   useEffect(() => {
-    setTimeout(() => {
+    
       fetchUsers();
-    }, 1000);
+   
 },[]);
 
   function Hidepass() {
@@ -73,8 +71,10 @@ function Login() {
          loginUser
          ) {
             if(loginUser.login&&loginUser.password){
-               const login=users.find((val)=>val.login===loginUser.login).login
+              const currentuser=users.find((val)=>val.login===loginUser.login)
+               const login=currentuser.login
               localStorage.setItem('userLogin',login);
+              setUser(currentuser)
                setIsAuth(true)
               localStorage.setItem('auth','true');
               navigate('/main');
@@ -116,7 +116,7 @@ function Login() {
     setLoginUser({...tempUser,id:loginUser.id});
   }
   
-  return isLoading&&loginUser.id!==''?<Loader/>
+  return isLoading&&loginUser.id!==0?<Loader/>
   :
    (
     <div className="background">

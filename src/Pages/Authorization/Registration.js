@@ -16,6 +16,11 @@ function Registration() {
   const{users,setUsers,user,setUser}=useContext(authContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+      setUser({login:'',email:'',password:'',pic:'',id:0})
+  }, [])
+  
+  
   
     function Hidepass() {
     const password = document.getElementById("pass");
@@ -65,16 +70,9 @@ function Registration() {
     
   }, [user.login,user.email,user.password])
 
-useEffect(() => {
-   setUser({...user,id:users.length});
-}, [])
 
-  useEffect(() => {
-    if(user.email&&
-      user.login&&
-      user.password)
-    return navigate('/authorization/login')
-  }, [users])
+
+ 
   
   function RegIn(e) {
     e.preventDefault();
@@ -106,10 +104,10 @@ useEffect(() => {
       setCorrectEmail({placeholder:"Ваша электронная почта",isCorrect:true})
 
     }
-    tempUser.id=user.id;
-   
+    tempUser.id=users.length;
+    tempUser.pic='';
 
-    setUser({...tempUser});
+    
 
     if(CorrectEmail.isCorrect&&
       CorrectLogin.isCorrect&&
@@ -119,18 +117,19 @@ useEffect(() => {
       user.password
       ){
         if(users.length!==0){
-          if(!SameUser(user,users)){
-            setUsers([...users,user]);
-            
+          if(!SameUser(tempUser,users)){
+           PostService.setUsers([...users,tempUser])
+           setUser(tempUser)
+            navigate('/authorization/login')
           }
           else swal({
             title:"Ошибка",
-            text:"Пользователь с ником "+user.login +" уже существует",
+            text:"Пользователь с ником "+tempUser.login +" уже существует",
             icon:"error"
           });
         }
         else {
-          setUsers([user]);
+          setUsers([tempUser]);
         }
        
     }
