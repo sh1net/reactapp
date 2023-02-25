@@ -312,15 +312,7 @@ for (let i = 0; i < questions.length; i++) {
   }
   
 }
-if(testOpenTime.hour<open.getHours()){
-  open.setDate(open.getDate()+1);
-}
-if(testOpenTime.hour<close.getHours()){
-  close.setDate(open.getDate()+1);
-}
-if(testOpenTime.hour<duration.getHours()){
-  duration.setDate(open.getDate()+1);
-}
+
 
 open.setHours(+testOpenTime.hour);
 open.setMinutes(+testOpenTime.minute);
@@ -355,12 +347,6 @@ function testImgSelect(id){
                     hours={hours}/>
                     </div>
                 </div>
-               {parseInt(testOpenTime.hour)< new Date().getHours()
-               ||(parseInt(testOpenTime.hour)< new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
-               ||(parseInt(testOpenTime.hour)=== new Date().getHours()&&parseInt(testOpenTime.minute)< new Date().getMinutes())
-               ?<div style={{margin:'-60px'}}>Установленно прошедшее время <br /> Тест переносится на завтра</div>
-                : ''
-               }
                 <div className="ct__selectors__item">
                     <div className="ct__item__text">
                         Время закрытия теста

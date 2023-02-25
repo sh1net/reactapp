@@ -231,4 +231,8 @@ static  async getTestImg(file,setQuestions,questions,id){
         ?{...testResult,usersResults:testResult.usersResults
           !==undefined?[...testResult.usersResults,userResult]:[userResult]}:testResult)}:result));
    }
+   static async setMyResults(result){
+    const users = await PostService.getUsers();
+    set(ref(db,'/users'),users.map(user=>user.login===localStorage.getItem('userLogin')?{...user,myResults:user.myResults!==undefined?[...user.myResults,result]:[result]}:user))
+   }
 }

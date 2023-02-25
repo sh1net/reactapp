@@ -56,14 +56,14 @@ function AddingGroups({groups,setGroups}) {
           PostService.getGroupImg(file,setAddingGroups,addingGroups,id);
         }, 2000);
       }
-    function groupImgSelect(){
-        document.getElementById("group__file").click();
+    function groupImgSelect(i){
+        document.getElementById("group__file"+i).click();
     }
   return (
     <div className='adding__side__groups'>
          <button className="mg__add__group__button" onClick={()=>addGroup()}>Добавить новую группу</button>
             <p className="mg__another__titles">Курирование</p>
-           {addingGroups.map((group)=>
+           {addingGroups.map((group,i)=>
                  <div key={group.id} className='side__groups__item__adding'>
                     
                     <div>
@@ -77,8 +77,8 @@ function AddingGroups({groups,setGroups}) {
                         <button className="mg__create__cansel__buttons" onClick={()=>cancelGroup(group.id)}>Отменить</button>
                         <button className="mg__create__cansel__buttons" onClick={()=>{createGroup(group.id,group)}}>Создать</button>
                         
-                        <button onClick={()=>groupImgSelect()} className="file__upload__button">Выбрать аватар </button>
-                        <input id="group__file" className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,group.id)}}/>
+                        <button onClick={()=>groupImgSelect(i)} className="file__upload__button">Выбрать аватар </button>
+                        <input id={"group__file"+i} className="file__upload__input" type="file" name="f" accept='image/png, image/jpeg' onChange={(e)=>{uploadImg(e,group.id)}}/>
                     </div>
                      
                     

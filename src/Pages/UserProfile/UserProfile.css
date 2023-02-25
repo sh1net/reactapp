@@ -4,9 +4,10 @@
     margin: 0 auto;
     display: flex;
     padding:20px;
-    flex-direction: column;
+    flex-direction: row;
     background-color: rgb(216, 216, 216);
-    justify-content: center;
+    justify-content: space-around;
+   height: 65vh;
     width: 95%;
     
 }
@@ -14,7 +15,7 @@
 .user__profile__general{
     display:flex;
     flex-direction:column;
-    max-width: 45%;
+    width: 45%;
 }
 
 .user__data__preview{
@@ -31,7 +32,7 @@
 .user__profile__data{
     display:flex;
     flex-direction: column;
-    margin-left:20px;
+    margin-left:100px;
 }
 
 .user__profile__icon{
@@ -74,6 +75,40 @@
     border-radius: 10px;
     height:20px;
     width:150px;
+    padding: 2px;
+    font-size: 15px;
     background-color: white;
     box-shadow: inset 1px 1px 3px -1px rgba(0, 0, 0, 0.6);
 }
+
+.user__statistic{
+    display: flex;
+    padding: 10px;
+    width: 45%;
+    height: 60%;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+.my__result{
+    margin: 10px 0;
+    background-color: aliceblue;
+    width: 50%;
+    height: 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #EBA600;
+}
+
+.my__result:last-child{
+    width: 50%;
+    height: 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 0px;
+}
+
+
+    

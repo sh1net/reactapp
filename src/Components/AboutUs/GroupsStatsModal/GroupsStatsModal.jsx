@@ -1,7 +1,8 @@
 import React from 'react'
 import cl from './GroupsStatsModalStyles.module.css'
+import { useNavigate } from 'react-router-dom'
 function GroupsStatsModal({results,visible,setStats}) {
-console.log(results)
+const navigate=useNavigate();
   return (
     results!==null&&results!==''
     ?
@@ -15,7 +16,7 @@ console.log(results)
                 {testResult.usersResults.map(userResult=> <div className={cl.userStat} key={userResult.nickname}>
                     <div className={cl.userName}>Имя: {userResult.nickname}</div>
                     <div className={cl.userMark}>баллы: {userResult.userMark} из {userResult.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</div>
-
+                    <button onClick={()=>navigate('/result/'+userResult.nickname+'/'+result.group+'/'+testResult.testID)}>Подробнее</button>
                 </div>
                     )}
             </div>)

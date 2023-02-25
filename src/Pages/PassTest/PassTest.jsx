@@ -2,7 +2,7 @@ import React from 'react'
 import './PassTestStyles.css'
 import Header from '../../Components/Header/Header'
 import Navbar from '../../Components/Navbar/Navbar'
-import { groupsContext } from '../../Context/useContext'
+import { authContext, groupsContext } from '../../Context/useContext'
 import { testContext } from '../../Context/useContext'
 import { useContext } from 'react'
 import { useFetching } from '../../hooks/useFething'
@@ -15,6 +15,7 @@ import TestPassing from '../TestPassing/TestPassing'
 
 
 function PassTest() {
+  const {user}=useContext(authContext)
   const {groups,setGroups}=useContext(groupsContext)
   const {setIsPassing}=useContext(testContext)
   const [fetchGroups,isLoading]=useFetching(async()=>{
@@ -94,10 +95,19 @@ useEffect(() => {
                 .
                 {new Date(userTest.openTime).getFullYear()}
               </div>
-              <button className='pass__test__button' onClick={()=>{setIsPassing(true)
+             {user.myResults!==undefined?
+             user.myResults.find(myResult=>myResult.passedTest.id===userTest.id)
+             ?<p>Вы уже прошли этот тест</p>
+              :<button className='pass__test__button' onClick={()=>{setIsPassing(true)
                 navigate('/TestPassing/'+group.groupName+'/'+userTest.id)}} disabled={dateDiff(new Date(userTest.openTime))<=0
                 &&dateDiff(new Date(userTest.closeTime))>=0?false:true}>Пройти</button>
-              <div>
+             : <button className='pass__test__button' onClick={()=>{setIsPassing(true)
+              navigate('/TestPassing/'+group.groupName+'/'+userTest.id)}} disabled={dateDiff(new Date(userTest.openTime))<=0
+              &&dateDiff(new Date(userTest.closeTime))>=0?false:true}>Пройти</button>
+            
+
+             }
+             <div>
                 {dateDiff(new Date(userTest.closeTime))<=0
                 ? <div className='date__time'>Тест закрыт</div>
                 : dateDiff(new Date(userTest.openTime))<=0

@@ -45,7 +45,6 @@ const [fetchResults]=useFetching(async()=>{
       function compareResultsAndMyGroups(group,myGroups){
         for (let i = 0; i < myGroups.length; i++) {
           if(myGroups[i].groupName===group){
-            console.log(myGroups[i].groupName+' | '+group)
             return true
           }
           
@@ -136,7 +135,6 @@ function checkGroup(groupId,userTestId){
 function visibleStatButton(userTestId){
   
   const thisTestResults=checkGroupsStats(userTestId);
-console.log(thisTestResults)
   for (let i = 0; i < thisTestResults.length; i++) {
   
     for (let j = 0; j < thisTestResults[i].testResults.length; j++) {
@@ -154,7 +152,6 @@ return false;
 function checkGroupsStats(userTestId){
   
 const thisTestResults=results.map(result=>result?{...result,testResults:result.testResults!==undefined?result.testResults.filter(testResult=>testResult.testID===userTestId&&testResult.usersResults!==undefined):''}:result)
-console.log(thisTestResults)
 return thisTestResults;
 
 }
@@ -213,8 +210,8 @@ return thisTestResults;
            
            <div className="test__item__buttons">
             <div className="test__item__buttons__left">
-            <button className="my__test__button" onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
-            <button className="my__test__button" onClick={()=>{removeTest(userTest.id,userTest.title)}}>Удалить</button>
+            <button disabled={visibleStatButton(userTest.id)} className="my__test__button" onClick={()=>{editUserTest(userTest.id)}}>Редактировать</button>
+            <button disabled={visibleStatButton(userTest.id)} className="my__test__button" onClick={()=>{removeTest(userTest.id,userTest.title)}}>Удалить</button>
             <GroupsStatsModal results={stats.testResult} visible={stats.isVisible} setStats={setStats}/>
            <button disabled={!visibleStatButton(userTest.id)} className="my__test__button" onClick={()=>{setStats({isVisible:true,testResult:checkGroupsStats(userTest.id)})}}>Статистика</button>
           </div>

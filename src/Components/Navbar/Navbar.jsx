@@ -10,25 +10,9 @@ import { useFetching } from '../../hooks/useFething';
 
 
 function Navbar() {
-  const {setIsAuth,user,setUser,users}=useContext(authContext);
+  const {setIsAuth,user}=useContext(authContext);
  
-  const [fetchUserById]=useFetching(async(id)=>{
-    const fetchedUserById=await PostService.getUserById(id);
-    setUser(fetchedUserById);
-    })
-
-  useEffect(() => {
-    if(!user.login){
-      const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id
-        fetchUserById(id);
-    }
-  }, [])
-  
-  
-console.log(user);
-
-
-    
+ 
  function exit(){
     setIsAuth(false);
     localStorage.removeItem('auth');

@@ -17,7 +17,7 @@ import swal from 'sweetalert'
 function TestPassing(){
   const navigate=useNavigate();
     const {groups,setGroups}=useContext(groupsContext)
-    const {isPassing,setIsPassing}=useContext(testContext)
+    const {setIsPassing}=useContext(testContext)
     const [fetchGroups,isLoading]=useFetching(async()=>{
       const fetchedGroups= await PostService.getGroups();
       if(fetchedGroups===null){
@@ -132,7 +132,7 @@ function chooseRightCaseSeveral(iQ,iA,e){
     }
     swal({
       icon:"warning",
-      title:"Завешить тест?",
+      title:"Завершить тест?",
       buttons: ["Нет", "Да"]
     }).then((result)=>{
      if(result===null){
@@ -177,6 +177,7 @@ function chooseRightCaseSeveral(iQ,iA,e){
      localStorage.removeItem('testID');
      
     PostService.setUserResult(params.groupName,params.testID,{nickname:localStorage.getItem('userLogin'),userMark:userMark,passedTest:passingTest})
+    PostService.setMyResults({passedTest:passingTest,myMark:userMark,group:params.groupName})
     swal({
       icon:"warning",
       title:"Хотите узнать результаты теста?",

@@ -20,8 +20,12 @@ function App(){
   const [groups,setGroups]=useState(null)
   const [isPassing, setIsPassing] = useState(false)
   const [results, setResults] = useState(null)
+
+  
+
   const [fetchUsers,isLoading]=useFetching(async()=>{
    const fetchedUsers= await PostService.getUsers();
+  
     setUsers(fetchedUsers);
   })
 
@@ -32,7 +36,10 @@ function App(){
     id:0,
     pic:''
   })
-
+  const [fetchUserById]=useFetching(async(id)=>{
+    const fetchedUserById=await PostService.getUserById(id);
+    setUser(fetchedUserById);
+    })
 
 
   useEffect(() => {
@@ -43,6 +50,9 @@ function App(){
         }
         if(childSnapshot.key==='results'){
           setResults(childSnapshot.val())
+        }
+        if(childSnapshot.key==='users'){
+          setUsers(childSnapshot.val())
         }
       });
     }, {
@@ -59,9 +69,15 @@ function App(){
 
   useEffect(() => {
     if(localStorage.getItem('auth')){
+      if(users!==null){
+     
+        const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id
+        fetchUserById(id);
+      }
+    
       setIsAuth(true);
     }
-  }, [])
+  }, [users])
 
   return(isLoading
     ?

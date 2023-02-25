@@ -13,24 +13,14 @@ import MainInformation from '../../Components/MainInformation/MainInformation';
 function Main() {
  
   
-    const {user,users,setUser}=useContext(authContext);
-    const [fetchUserById,isLoading]=useFetching(async(login)=>{
-    const fetchedUserById=await PostService.getUserById(login);
-    setUser(fetchedUserById);
-    })
+    
   
-    console.log(user);
-    useEffect(() => {
-     
-      setTimeout(() => {
-        const id=(users.find((v)=>v.login==localStorage.getItem('userLogin'))).id
-        fetchUserById(id);
-      }, 1000);
-    }, [])
+    
    
-  return (///isLoading&&!user.login
-    ///?<Loader/>
-    ///:
+   
+  return (
+   
+    
     <div>
       <Header/>
         <Navbar/>
