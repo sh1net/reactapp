@@ -16,7 +16,7 @@ const navigate=useNavigate();
                 {testResult.usersResults.map(userResult=> <div className={cl.userStat} key={userResult.nickname}>
                     <div className={cl.userName}>Имя: {userResult.nickname}</div>
                     <div className={cl.userMark}>баллы: {userResult.userMark} из {userResult.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</div>
-                    <button onClick={()=>navigate('/result/'+userResult.nickname+'/'+result.group+'/'+testResult.testID)}>Подробнее</button>
+                    <button className={cl.stats__button} onClick={()=>navigate('/result/'+userResult.nickname+'/'+result.group+'/'+testResult.testID)}>Подробнее</button>
                 </div>
                     )}
             </div>)

@@ -24,7 +24,7 @@ function UserProfile() {
         document.getElementById("file__input").click();
     }
   return (
-    <div >
+    <div className="user__profile__container">
         <Header/>
         <Navbar/>
         <div className="user__profile__bg">
@@ -48,12 +48,12 @@ function UserProfile() {
             <div className='my__results'>Мои результаты</div>
              {user.myResults!==undefined
              ? 
-              user.myResults.map(myResult=> <div key={myResult.passedTest.id} className='my__result'>
-                <div className='test__name'>Тест:{myResult.passedTest.title}</div>
-                <div className='test__group'>Группа:{myResult.group}</div>
+              user.myResults.map(myResult=> <div key={myResult.passedTest.id} className="main__results">
+                <div className='test__names'>Тест:<p className="main__stats__style">{myResult.passedTest.title}</p></div>
+                <div className='test__names'>Группа:<p className="main__stats__style">{myResult.group}</p></div>
 
-                <div className='my__mark'>Мои баллы: {myResult.myMark} из {myResult.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</div>
-                <button onClick={()=>navigate('/yourResult/'+myResult.group+'/'+myResult.passedTest.id)}>подробнее</button>
+                <div className='test__names'>Мои баллы: <p className="main__stats__style">{myResult.myMark}</p>из<p className="main__stats__style">{myResult.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</p></div>
+                <button className="user__stats__check" onClick={()=>navigate('/yourResult/'+myResult.group+'/'+myResult.passedTest.id)}>Подробнее</button>
               </div>
               )
               
@@ -64,7 +64,6 @@ function UserProfile() {
            
           
         </div>
-        <hr style={{width:'100%',height:'1px',margin:'50px 0',backgroundColor:'#000'}}/>
         
     </div>
   )
