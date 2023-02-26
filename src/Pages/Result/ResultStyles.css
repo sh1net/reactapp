@@ -1,0 +1,7 @@
+.passed__test__user__data{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 5px;
+    font-size: 20px;
+    text-decoration: underline;
+}

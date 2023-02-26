@@ -6,6 +6,7 @@ import {  useNavigate } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
 import { useState } from 'react'
 import '../yourResult/YourResultStyles.css'
+import './ResultStyles.css'
 import { useParams } from 'react-router-dom'
 
 function Result() {
@@ -66,17 +67,20 @@ function Result() {
      }
      return false;
     }
+    console.log(result);
     return (
         isLoading
             ?<Loader/>
             :
             <div className='bodyy'>
                   <div className="test__passing__container">
-                  <button className="test__passing__ending__button" onClick={()=>{navigate('/myTests')}}>Вернуться к тестам</button>
     
                     <div className="passing__test__title">{result.passedTest.title}   </div>
-                    Пользователь: {result.nickname}
+                    <div className='passed__test__user__data'>
+                    <div className="passed__test__user">  Проходил: {result.nickname} </div>
                     <div className="passed__test__mark">Набранные баллы: {result.userMark}/{result.passedTest.questions.reduce((sum,question)=>sum+=Number(question.mark),0)}</div>
+                    </div>
+                  
     
                     {result.passedTest.questions.map((question,iQ)=> <div key={question.id} className ={
                     question.type==='oneIsRight'
@@ -92,12 +96,7 @@ function Result() {
                       ?''
                       :<img className='passing__question__img' src={question.pic} alt=""/>
                       }
-                       {question.type!=='severalIsRight'
-                       ?<div> ответ {result.nickname}</div>
-                       :<div>ответы {result.nickname}</div>
-    
-    
-                       }
+                     <div> {result.nickname} ответил</div>
                       {
                                 question.answers.map((answer,iA)=>
                                 <div className="ct__answer" key={answer.id}>
@@ -105,8 +104,7 @@ function Result() {
                                   question.type=="oneIsRight"
                                   
                                   ?<div className="test__passing__input__answer">
-                                   
-                                    <input disabled checked={answer.studentChose?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.studentChose?true:false} />
+                                <input  disabled checked={answer.isRight} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.studentChose} />
                                     <div className='passing__answer'>{answer.answerVal}</div>
                                   </div>
                                 :question.type=="severalIsRight"
@@ -176,6 +174,8 @@ function Result() {
                     )
     
                     }
+                                      <button className="test__passing__ending__button" onClick={()=>{navigate('/myTests')}}>Вернуться к тестам</button>
+
                   </div>
             </div>
       )

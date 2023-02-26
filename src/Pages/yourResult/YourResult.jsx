@@ -68,7 +68,7 @@ function YourResult() {
  }
  return false;
 }
-
+console.log(result);
 
   return (
     isLoading
@@ -109,7 +109,7 @@ function YourResult() {
                               
                               ?<div className="test__passing__input__answer">
                                
-                                <input disabled checked={answer.studentChose?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.studentChose?true:false} />
+                                <input disabled checked={answer.studentChose?true:false} className="ct__radio__btn" type="radio" name={'oneIsRight'+iQ} value={answer.studentChose} />
                                 <div className='passing__answer'>{answer.answerVal}</div>
                               </div>
                             :question.type=="severalIsRight"

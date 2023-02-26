@@ -61,7 +61,7 @@ function Registration() {
        setCorrectPassword({placeholder:"Ваш пароль",isCorrect:true})
     }
    
-    if(user.email.includes('@')&&user.email.length>8&&(user.email.endsWith('.com')||user.email.endsWith('.ru'))){
+    if(user.email.includes('@')&&user.email.length>8&&((user.email.endsWith('.com')||user.email.endsWith('.ru')))){
       
         setCorrectEmail({placeholder:"Ваша электронная почта",isCorrect:true})
     }
